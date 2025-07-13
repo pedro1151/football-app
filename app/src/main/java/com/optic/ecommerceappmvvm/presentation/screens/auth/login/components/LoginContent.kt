@@ -109,7 +109,7 @@ fun LoginContent(navController: NavHostController
                     .fillMaxWidth()
                     .wrapContentHeight(),
                 colors = CardDefaults.cardColors(
-                    containerColor = Color.White.copy(alpha = 0.99f)
+                    containerColor = MaterialTheme.colorScheme.primaryContainer
                 ),
                 shape = RoundedCornerShape(16.dp),
                 elevation = CardDefaults.cardElevation(4.dp)
