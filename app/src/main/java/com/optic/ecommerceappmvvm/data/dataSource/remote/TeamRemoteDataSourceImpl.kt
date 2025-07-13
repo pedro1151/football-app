@@ -1,0 +1,29 @@
+package com.optic.ecommerceappmvvm.data.dataSource.remote
+
+import com.optic.ecommerceappmvvm.data.dataSource.remote.service.TeamService
+import com.optic.ecommerceappmvvm.domain.model.League.League
+import com.optic.ecommerceappmvvm.domain.model.player.Player
+import com.optic.ecommerceappmvvm.domain.model.Team
+import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerRequest
+import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
+import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
+import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
+import retrofit2.Response
+
+class TeamRemoteDataSourceImpl (private val teamService: TeamService): TeamRemoteDataSource {
+    override suspend fun getAll(): Response<List<Team>> = teamService.getTeams()
+    override suspend fun getPlayers(): Response<List<Player>> = teamService.getPlayers()
+    override suspend fun getPlayerStats(playerId: Int): Response<PlayerWithStats> = teamService.getPlayerStats(playerId)
+    override suspend fun getLeagues(
+        name: String,
+        type: String,
+        countryName: String
+    ): Response<List<League>> = teamService.getLeagues(name, type, countryName)
+
+    override suspend fun createFollowedPlayer(playerId: Int): Response<FollowedPlayerResponse> = teamService.createFollowedPlayer(FollowedPlayerRequest( playerId))
+
+    override suspend fun getFollowedPlayers(): Response<List<Player>> = teamService.getFollowedPlayers()
+    override suspend fun deleteFollowedPlayer(playerId: Int): Response<DefaultResponse> = teamService.deleteFollowedPlayer(playerId)
+
+
+}

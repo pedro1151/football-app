@@ -1,0 +1,24 @@
+package com.optic.ecommerceappmvvm.data.dataSource.remote
+
+import com.optic.ecommerceappmvvm.domain.model.League.League
+import com.optic.ecommerceappmvvm.domain.model.player.Player
+import com.optic.ecommerceappmvvm.domain.model.Team
+import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
+import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
+import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
+import retrofit2.Response
+
+interface TeamRemoteDataSource {
+  /* tambien en este archivo de datasource, se responde con Response de retrofit,
+   esta aclarcion es util, ya que en las implementaciones se utiliza FLow
+   */
+    suspend fun getAll(): Response<List<Team>>
+    suspend fun getPlayers(): Response<List<Player>>
+    suspend fun getPlayerStats(playerId: Int): Response<PlayerWithStats>
+    suspend fun getLeagues(name: String, type: String, countryName: String): Response<List<League>>
+
+    //PLAYER SEGUIDOS
+    suspend fun createFollowedPlayer(playerId: Int): Response<FollowedPlayerResponse>
+    suspend fun getFollowedPlayers(): Response<List<Player>>
+    suspend fun deleteFollowedPlayer(playerId: Int): Response<DefaultResponse>
+}

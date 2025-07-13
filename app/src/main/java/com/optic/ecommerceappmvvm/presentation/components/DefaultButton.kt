@@ -1,0 +1,39 @@
+package com.optic.ecommerceappmvvm.presentation.components
+
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+// import androidx.compose.material.icons.Icons
+// import androidx.compose.material.icons.filled.ArrowForward
+
+@Composable
+fun DefaultButton(
+    modifier: Modifier,
+    text: String,
+    onClick: () -> Unit,
+    color: Color = Color(0xFF2196F3), // Puedes usar Blue500 o definir aquí
+    //icon: ImageVector = Icons.Default.ArrowForward
+) {
+    Button(
+        modifier = modifier,
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = color
+        )
+    ) {
+        /*
+        Icon(
+            imageVector = icon,
+            contentDescription = null
+        )
+        */
+        Spacer(modifier = Modifier.width(10.dp))
+        Text(text = text)
+    }
+}
