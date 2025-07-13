@@ -32,7 +32,7 @@ fun FollowContent(
     onFollowClick: (Int) -> Unit = {},
     onUnFollowClick : (Int) -> Unit = {},
 ) {
-    val tabTitles = listOf("Equipos", "Jugadores")
+    val tabTitles = listOf("Equipos Edgar", "Jugadores")
     val pagerState = rememberPagerState(pageCount = { tabTitles.size })
     val coroutineScope = rememberCoroutineScope()
 
