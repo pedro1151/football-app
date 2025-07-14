@@ -1,6 +1,7 @@
 package com.optic.ecommerceappmvvm.presentation.screens.follow.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.*
@@ -41,6 +42,7 @@ fun FollowContent(
         modifier = Modifier
             .fillMaxSize()
             .padding(paddingValues)
+            .background(MaterialTheme.colorScheme.background)
     ) {
         TabRow(
             selectedTabIndex = pagerState.currentPage,

@@ -9,6 +9,8 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 
 import com.optic.ecommerceappmvvm.presentation.navigation.screen.admin.AdminScreen
+import com.optic.ecommerceappmvvm.presentation.ui.theme.selectedIconColor
+import com.optic.ecommerceappmvvm.presentation.ui.theme.selectedTextColor
 
 @Composable
 fun RowScope.AdminBottomBarItem(
@@ -38,11 +40,11 @@ fun RowScope.AdminBottomBarItem(
             }
         },
         colors = NavigationBarItemDefaults.colors(
-            selectedIconColor = MaterialTheme.colorScheme.primary,
+            selectedIconColor = MaterialTheme.colorScheme.selectedIconColor,
             unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
-            selectedTextColor = MaterialTheme.colorScheme.primary,
+            selectedTextColor = MaterialTheme.colorScheme.selectedTextColor,
             unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant,
-            indicatorColor = MaterialTheme.colorScheme.surfaceVariant
+            indicatorColor = MaterialTheme.colorScheme.selectedIconColor
         )
     )
 }
