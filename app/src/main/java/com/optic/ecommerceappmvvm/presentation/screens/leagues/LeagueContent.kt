@@ -57,7 +57,7 @@ fun LeagueContent(
         modifier = modifier
             .padding(paddingValues)
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.primaryContainer)
+            .background(MaterialTheme.colorScheme.background)
 
     ) {
         LeagueSearchBar(
@@ -90,12 +90,12 @@ fun LeagueContent(
                         .height(60.dp)
                         .padding(horizontal = 8.dp),
                     shape = RoundedCornerShape(16.dp),
-                    /*
+
                     colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surface
+                        containerColor = MaterialTheme.colorScheme.primaryContainer
                     ),
 
-                     */
+
                     elevation = CardDefaults.cardElevation(0.dp)
                 ) {
                     Row(

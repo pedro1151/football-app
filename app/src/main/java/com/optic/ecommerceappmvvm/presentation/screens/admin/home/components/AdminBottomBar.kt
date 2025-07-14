@@ -1,5 +1,6 @@
 package com.optic.ecommerceappmvvm.presentation.screens.admin.home.components
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.runtime.*
 import androidx.navigation.NavHostController
@@ -20,7 +21,9 @@ fun AdminBottomBar(navController: NavHostController) {
     val bottomBarDestination = screens.any { it.route == currentDestination?.route }
 
     if (bottomBarDestination) {
-        NavigationBar {
+        NavigationBar(
+            containerColor = MaterialTheme.colorScheme.primaryContainer// o cualquier color que quieras
+        ) {
             screens.forEach { screen ->
                 AdminBottomBarItem(
                     screen = screen,

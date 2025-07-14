@@ -12,6 +12,13 @@ val FollowButtonTextLight = Color(0xFF4A4A4A)
 val FollowButtonBackgroundDark = Color(0xFF8E24AA)
 val FollowButtonTextDark = Color.White
 
+
+val SelectedTextColorLight = Grafito
+val SelectedIconColorLight = Grafito
+
+val SelectedTextColorDark = Color(0XFF2dad0D)
+val SelectedIconColorDark = Color(0XFF2dad0D)
+
 val ColorScheme.followButtonBackground: Color
     @Composable get() = when (LocalAppTheme.current.value) {
         AppThemeMode.DARK -> FollowButtonBackgroundDark
@@ -22,4 +29,17 @@ val ColorScheme.followTextColor: Color
     @Composable get() = when (LocalAppTheme.current.value) {
         AppThemeMode.DARK -> FollowButtonTextDark
         AppThemeMode.LIGHT -> FollowButtonTextLight
+    }
+
+
+val ColorScheme.selectedTextColor: Color
+    @Composable get() = when (LocalAppTheme.current.value) {
+        AppThemeMode.DARK -> SelectedTextColorDark
+        AppThemeMode.LIGHT -> SelectedTextColorLight
+    }
+
+val ColorScheme.selectedIconColor: Color
+    @Composable get() = when (LocalAppTheme.current.value) {
+        AppThemeMode.DARK -> SelectedIconColorDark
+        AppThemeMode.LIGHT -> SelectedIconColorLight
     }

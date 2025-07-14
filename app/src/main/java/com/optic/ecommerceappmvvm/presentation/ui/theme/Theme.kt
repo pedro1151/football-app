@@ -19,6 +19,8 @@ val Teal500 = Color(0xFF018786)
 val WhiteMe = Color (0xFFFFFFFF)
 val Grafito = Color(0xFF4A4A4A)
 val azulMarino = Color(0xFF1565C0)
+val LightBlack1 =  Color(0xFF1b1b1b)
+val LightWhite1 = Color (0XFFe7e7e7)
 
 
 
@@ -29,23 +31,23 @@ private val LightColorScheme = lightColorScheme(
     onPrimaryContainer = Color.White,
     secondary = Teal500,
     onSecondary = Color.White,
-    background = Color.White,
+    background = LightWhite1,
     onBackground = Color.Black,
     surface = WhiteMe,
     onSurface = Color.Black,
 )
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Color.Black,
-    onPrimary = Color.Black,
-    primaryContainer = Grafito,
+    primary = Color.White,
+    onPrimary = Color.White,
+    primaryContainer = LightBlack1,
     onPrimaryContainer = WhiteMe,
-    secondary = Teal200,
-    onSecondary = Color.Black,
-    background = Grafito,
+    secondary = Grafito,
+    onSecondary = Color.White,
+    background = Color.Black,
     onBackground = WhiteMe,
-    surface = WhiteMe,
-    onSurface = Color.White,
+    surface = LightBlack1 ,
+    onSurface = Color.White
 )
 
 

@@ -1,5 +1,6 @@
 package com.optic.ecommerceappmvvm.presentation.components.follow
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,8 +23,9 @@ fun FollowButton(
         shape = RoundedCornerShape(30),
         contentPadding = PaddingValues(horizontal = 12.dp, vertical = 4.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.followButtonBackground
-        )
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.secondary) // 👈 Contorno blanco
     ) {
         Text(
             text = title,

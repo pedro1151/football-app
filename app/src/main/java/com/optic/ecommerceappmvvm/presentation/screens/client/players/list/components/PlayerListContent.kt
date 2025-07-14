@@ -41,7 +41,8 @@ fun PlayerListContent(
     LazyColumn(
         modifier = modifier
             .padding(paddingValues)
-            .fillMaxSize(),
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
         contentPadding = PaddingValues(vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
