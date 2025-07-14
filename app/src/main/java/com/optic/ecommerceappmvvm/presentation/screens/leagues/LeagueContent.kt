@@ -1,5 +1,6 @@
 package com.optic.ecommerceappmvvm.presentation.screens.leagues
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -56,6 +57,7 @@ fun LeagueContent(
         modifier = modifier
             .padding(paddingValues)
             .fillMaxSize()
+            .background(MaterialTheme.colorScheme.primaryContainer)
 
     ) {
         LeagueSearchBar(
@@ -79,6 +81,7 @@ fun LeagueContent(
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
+
         ) {
             items(leagues) { league ->
                 Card(
