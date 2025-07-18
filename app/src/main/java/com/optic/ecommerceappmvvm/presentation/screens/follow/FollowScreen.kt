@@ -25,6 +25,12 @@ fun FollowScreen(
     val followedPlayerListState by viewModel.followedPlayerListState.collectAsState()
     val filteredPlayers by viewModel.filteredPlayersState.collectAsState()
 
+    // TEAMS SEGUIDOS
+    val followedTeamListState by viewModel.followedTeamListState.collectAsState()
+    // LISTA YA FILTRADA DE JUGADORES Q QUEDAN SIN SEGUIR
+    val filteredTeams by viewModel.filteredTeamsState.collectAsState()
+
+
     Scaffold (
         topBar = {
             PrimaryTopBar(
@@ -39,12 +45,15 @@ fun FollowScreen(
         } else if (teamsState is Resource.Success && playersState is Resource.Success) {
             FollowContent(
                 paddingValues = paddingValues,
-                teams = (teamsState as Resource.Success).data,
+                teams = filteredTeams,
                 players = filteredPlayers,
                 followedPlayers = (followedPlayerListState as Resource.Success).data?: emptyList(),
+                followedTeams = (followedTeamListState as Resource.Success).data?: emptyList(),
                 navController = navController,
                 onFollowClick = { playerId -> viewModel.createFollowedPlayer(playerId) } ,// 👈 PASÁS LA FUNCIÓN
-                onUnFollowClick = { playerId -> viewModel.deleteFollowedPlayer(playerId) } // 👈 PASÁS LA FUNCIÓN
+                onUnFollowClick = { playerId -> viewModel.deleteFollowedPlayer(playerId) }, // 👈 PASÁS LA FUNCIÓN
+                onFollowTeamClick = { teamId -> viewModel.createFollowedTeam(teamId) } ,// 👈 PASÁS LA FUNCIÓN
+                onUnFollowTeamClick = { teamId -> viewModel.deleteFollowedTeam(teamId) } ,// 👈 PASÁS LA FUNCIÓN
             )
         }
         // Manejo de errores

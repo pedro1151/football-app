@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.optic.ecommerceappmvvm.domain.model.Team
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
+import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamRequest
+import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
 import com.optic.ecommerceappmvvm.domain.model.player.Player
 import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
 import com.optic.ecommerceappmvvm.domain.useCase.team.TeamUseCase
@@ -44,10 +46,27 @@ class FollowViewModel @Inject constructor(
     private val _deleteFollowedState = MutableStateFlow<Resource<DefaultResponse>>(Resource.Loading)
     val deleteFollowedState : StateFlow<Resource< DefaultResponse>> = _deleteFollowedState
 
+    // TEAMS SEGUIDOS
+
+    //LISTA DE TEAMS SEGUIDOS
+    private val _followedTeamListState = MutableStateFlow<Resource<List<Team>>>(Resource.Loading)
+    val followedTeamListState: StateFlow<Resource<List<Team>>> = _followedTeamListState
+
+    // estado para el Crear un team seguido
+    private val _createfollowedTeamState = MutableStateFlow<Resource<FollowedTeamResponse>>(Resource.Loading)
+    val createfollowedTeamState : StateFlow<Resource<FollowedTeamResponse>> = _createfollowedTeamState
+
+      // estado para delete team seguido
+    private val _deleteFollowedTeamState = MutableStateFlow<Resource<DefaultResponse>>(Resource.Loading)
+    val deleteFollowedTeamState : StateFlow<Resource< DefaultResponse>> = _deleteFollowedTeamState
+
+
     init {
         getTeams()
         getPlayers()
         getFollowedPlayers()
+
+        getFollowedTeams()
     }
     private fun getPlayers() {
         viewModelScope.launch {
@@ -133,6 +152,86 @@ class FollowViewModel @Inject constructor(
         val filtered = allPlayers.filter { it.id !in followedIds }
 
         println("combine ejecutado: jugadores=${allPlayers.size}, seguidos=${followedPlayers.size}, filtrados=${filtered.size}")
+        filtered
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = emptyList()
+    )
+
+
+
+
+
+    // funciones para TEAMS SEGUIDOS
+
+    private fun getFollowedTeams() {
+        viewModelScope.launch {
+            teamUseCase.getFollowedTeamsUC().collectLatest { result ->
+                _followedTeamListState.value = result
+            }
+        }
+    }
+
+
+    fun createFollowedTeam(teamId: Int) {
+        viewModelScope.launch {
+            teamUseCase.createFollowedTeamUC(teamId).collectLatest { result ->
+                Log.d("FollowVM", "createFollowedPlayer result: $result")
+                _createfollowedTeamState.value = result
+
+                if (result is Resource.Success) {
+                    Log.d("FollowVM", "Refresh followed and all teams")
+                    getFollowedTeams() // 👈 refresca la lista de teams seguidos
+                    getTeams()
+
+                    // Forzar emitir valores nuevos aunque sean iguales (para test)
+                    _teamsState.value = _teamsState.value
+                    _followedTeamListState.value =  _followedTeamListState.value
+                }
+            }
+
+
+        }
+    }
+
+
+    // borrar un TEAM seguido
+
+    fun deleteFollowedTeam(teamId: Int) {
+        viewModelScope.launch {
+            teamUseCase.deleteFollowedTeamUC(teamId).collectLatest { result ->
+                Log.d("FollowVM", "deleteFollowedGTeam result: $result")
+                _deleteFollowedTeamState.value = result
+
+                if (result is Resource.Success) {
+                    Log.d("FollowVM", "Refresh followed and all teams")
+                    getFollowedTeams() // 👈 refresca la lista de teams seguidos
+                    getTeams()
+
+                    // Forzar emitir valores nuevos aunque sean iguales (para test)
+                    _teamsState.value = _teamsState.value
+                    _followedTeamListState.value =  _followedTeamListState.value
+                }
+            }
+
+
+        }
+    }
+
+    // Lista Filtrada de teams
+
+    val filteredTeamsState: StateFlow<List<Team>> = combine(
+        teamsState,
+        followedTeamListState
+    ) { allTeamsResource, followedTeamsResource ->
+        val allPlayers = (allTeamsResource as? Resource.Success)?.data?.toList() ?: emptyList()
+        val followedPlayers = (followedTeamsResource as? Resource.Success)?.data?.toList() ?: emptyList()
+
+        val followedIds = followedPlayers.mapNotNull { it.id }.toSet()
+        val filtered = allPlayers.filter { it.id !in followedIds }
+
+        println("combine ejecutado: equipos=${allPlayers.size}, seguidos=${followedPlayers.size}, filtrados=${filtered.size}")
         filtered
     }.stateIn(
         scope = viewModelScope,

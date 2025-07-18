@@ -30,9 +30,13 @@ fun FollowContent(
     teams: List<Team>,
     players: List<Player>,
     followedPlayers:List<Player>,
+    followedTeams: List<Team>,
     navController: NavHostController,
     onFollowClick: (Int) -> Unit = {},
     onUnFollowClick : (Int) -> Unit = {},
+
+    onFollowTeamClick : (Int) -> Unit = {},
+    onUnFollowTeamClick : (Int) -> Unit = {}
 ) {
     val tabTitles = listOf("Equipos Edgar", "Jugadores")
     val pagerState = rememberPagerState(pageCount = { tabTitles.size })
@@ -75,10 +79,10 @@ fun FollowContent(
             when (page) {
                 0 -> FollowedTeamContent(
                     teams = teams,
-                    followedTeams = teams,
+                    followedTeams = followedTeams,
                     navController = navController,
-                    onFollowClick = onFollowClick,
-                    onUnFollowClick = onUnFollowClick,
+                    onFollowClick = onFollowTeamClick,
+                    onUnFollowClick =  onUnFollowTeamClick,
                     paddingValues = PaddingValues(8.dp)
                 )
                 1 -> FollowedPlayerContent(

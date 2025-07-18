@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets
 
 
 data class Team(
-    @SerializedName("id") val id: String? = null,
+    @SerializedName("id") val id: Int? = null,
     @SerializedName("name") var name: String,
     @SerializedName("country") val country: String? = null,
     @SerializedName("founded") val founded: Int? = null,

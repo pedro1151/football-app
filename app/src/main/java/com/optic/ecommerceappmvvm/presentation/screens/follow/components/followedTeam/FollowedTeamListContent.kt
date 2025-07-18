@@ -105,7 +105,7 @@ fun FollowedTeamListContent(
 
                                     UnFollowButton(
                                         onClick = {
-                                            //player.id?.let { onUnFollowClick(it) }
+                                            player.id?.let { onUnFollowClick(it) }
                                         }
                                     )
                                 }

@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.optic.ecommerceappmvvm.domain.model.Team
+import com.optic.ecommerceappmvvm.presentation.components.follow.FollowButton
 
 
 @Composable
@@ -51,8 +52,8 @@ fun TeamListContent(
             ) {
                 Row(
                     modifier = Modifier
-                        .padding(12.dp)
-                        .fillMaxWidth(),
+                        .padding(horizontal = 12.dp)
+                        .fillMaxSize(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     AsyncImage(
@@ -73,6 +74,14 @@ fun TeamListContent(
                             fontSize = 12.sp
                         ),
                         color = MaterialTheme.colorScheme.onSurface
+                    )
+
+                    Spacer(modifier = Modifier.weight(1f)) // ⬅️ Empuja el botón a la derecha
+
+                    FollowButton(
+                        onClick = {
+                            team.id?.let { onFollowClick(it) }
+                        }
                     )
                 }
             }
