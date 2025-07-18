@@ -11,4 +11,10 @@ data class TeamUseCase(
     val createFollowedPlayerUC   : CreateFollowedPlayerUC,
     val deleteFollowedPlayerUC   : DeleteFollowedPlayerUC,
 
+    // UC TEAM SEGUIDOS
+
+    val getFollowedTeamsUC   : GetFollowedTeamsUC,
+    val createFollowedTeamUC   : CreateFollowedTeamUC,
+    val deleteFollowedTeamUC  : DeleteFollowedTeamUC
+
 )

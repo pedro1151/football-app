@@ -20,6 +20,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.optic.ecommerceappmvvm.presentation.screens.client.players.list.components.PlayerListContent
 import com.optic.ecommerceappmvvm.presentation.screens.follow.FollowViewModel
 import com.optic.ecommerceappmvvm.presentation.screens.follow.components.followedPlayer.FollowedPlayerContent
+import com.optic.ecommerceappmvvm.presentation.screens.follow.components.followedTeam.FollowedTeamContent
 
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -72,9 +73,12 @@ fun FollowContent(
             //modifier = Modifier.weight(1f) // 👈 LIMITA la altura
         ) { page ->
             when (page) {
-                0 -> TeamListContent(
-                    modifier = Modifier.fillMaxSize(),
+                0 -> FollowedTeamContent(
                     teams = teams,
+                    followedTeams = teams,
+                    navController = navController,
+                    onFollowClick = onFollowClick,
+                    onUnFollowClick = onUnFollowClick,
                     paddingValues = PaddingValues(8.dp)
                 )
                 1 -> FollowedPlayerContent(

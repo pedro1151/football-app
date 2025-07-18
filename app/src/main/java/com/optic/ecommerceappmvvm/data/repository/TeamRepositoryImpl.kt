@@ -7,6 +7,7 @@ import com.optic.ecommerceappmvvm.domain.model.League.League
 import com.optic.ecommerceappmvvm.domain.model.player.Player
 import com.optic.ecommerceappmvvm.domain.model.Team
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
+import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
 import com.optic.ecommerceappmvvm.domain.repository.TeamRepository
@@ -78,4 +79,29 @@ class TeamRepositoryImpl(
         )
     }
 
+
+    // FOllowed Teams
+    override suspend fun getFollowedTeams(): Flow<Resource<List<Team>>> = flow{
+        emit(
+            ResponseToRequest.send(
+                teamRemoteDataSource.getFollowedTeams()
+            )
+        )
+    }
+
+    override suspend fun createFollowedTeam(teamId: Int): Flow<Resource<FollowedTeamResponse>> = flow{
+        emit(
+            ResponseToRequest.send(
+                teamRemoteDataSource.createFollowedTeam(teamId)
+            )
+        )
+    }
+
+    override suspend fun deleteFollowedTeam(teamId: Int): Flow<Resource<DefaultResponse>> = flow{
+        emit(
+            ResponseToRequest.send(
+                teamRemoteDataSource.deleteFollowedTeam(teamId)
+            )
+        )
+    }
 }

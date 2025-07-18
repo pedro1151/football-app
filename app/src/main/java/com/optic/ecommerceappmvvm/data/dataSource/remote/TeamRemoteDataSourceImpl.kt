@@ -6,6 +6,8 @@ import com.optic.ecommerceappmvvm.domain.model.player.Player
 import com.optic.ecommerceappmvvm.domain.model.Team
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerRequest
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
+import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamRequest
+import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
 import retrofit2.Response
@@ -24,6 +26,15 @@ class TeamRemoteDataSourceImpl (private val teamService: TeamService): TeamRemot
 
     override suspend fun getFollowedPlayers(): Response<List<Player>> = teamService.getFollowedPlayers()
     override suspend fun deleteFollowedPlayer(playerId: Int): Response<DefaultResponse> = teamService.deleteFollowedPlayer(playerId)
+
+    // FOLLOWED TEAMS
+    override suspend fun createFollowedTeam(teamId: Int): Response<FollowedTeamResponse>  = teamService.createFollowedTeam(
+        FollowedTeamRequest(teamId)
+    )
+
+    override suspend fun getFollowedTeams(): Response<List<Team>> = teamService.getFollowedTeams()
+
+    override suspend fun deleteFollowedTeam(playerId: Int): Response<DefaultResponse> = teamService.deleteFollowedPlayer(playerId)
 
 
 }

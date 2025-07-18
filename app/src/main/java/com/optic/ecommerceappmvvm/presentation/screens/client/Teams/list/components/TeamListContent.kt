@@ -17,6 +17,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.optic.ecommerceappmvvm.domain.model.Team
 
@@ -25,7 +26,9 @@ import com.optic.ecommerceappmvvm.domain.model.Team
 fun TeamListContent(
     modifier: Modifier = Modifier,
     teams: List<Team>,
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    navController: NavHostController,
+    onFollowClick: (Int) -> Unit = {}
 ) {
     LazyColumn(
         modifier = modifier

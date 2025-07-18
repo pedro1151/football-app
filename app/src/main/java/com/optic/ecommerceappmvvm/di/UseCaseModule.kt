@@ -7,8 +7,11 @@ import com.optic.ecommerceappmvvm.domain.useCase.auth.*
 import com.optic.ecommerceappmvvm.domain.useCase.external.ExternalUseCase
 import com.optic.ecommerceappmvvm.domain.useCase.external.LoginGoogleUseCase
 import com.optic.ecommerceappmvvm.domain.useCase.team.CreateFollowedPlayerUC
+import com.optic.ecommerceappmvvm.domain.useCase.team.CreateFollowedTeamUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.DeleteFollowedPlayerUC
+import com.optic.ecommerceappmvvm.domain.useCase.team.DeleteFollowedTeamUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.GetFollowedPlayersUC
+import com.optic.ecommerceappmvvm.domain.useCase.team.GetFollowedTeamsUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.GetLeaguesUseCase
 import com.optic.ecommerceappmvvm.domain.useCase.team.GetPlayerStatsUseCase
 import com.optic.ecommerceappmvvm.domain.useCase.team.GetPlayersUseCase
@@ -40,7 +43,12 @@ object UseCaseModule {
         getLeaguesUseCase = GetLeaguesUseCase(teamRepository),
         getFollowedPlayersUC = GetFollowedPlayersUC(teamRepository),
         createFollowedPlayerUC = CreateFollowedPlayerUC(teamRepository),
-        deleteFollowedPlayerUC = DeleteFollowedPlayerUC(teamRepository)
+        deleteFollowedPlayerUC = DeleteFollowedPlayerUC(teamRepository),
+
+        getFollowedTeamsUC = GetFollowedTeamsUC(teamRepository),
+        createFollowedTeamUC = CreateFollowedTeamUC(teamRepository),
+        deleteFollowedTeamUC =   DeleteFollowedTeamUC(teamRepository)
+
     )
 
     @Provides

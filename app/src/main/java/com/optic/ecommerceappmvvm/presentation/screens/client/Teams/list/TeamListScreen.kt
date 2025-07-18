@@ -32,7 +32,7 @@ fun TeamListScreen(
             }
 
             is Resource.Success -> {
-                TeamListContent(modifier = Modifier, result.data, paddingValues)
+               // TeamListContent(modifier = Modifier, result.data, paddingValues)
             }
 
             is Resource.Failure -> {

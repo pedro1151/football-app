@@ -4,6 +4,7 @@ import com.optic.ecommerceappmvvm.domain.model.League.League
 import com.optic.ecommerceappmvvm.domain.model.player.Player
 import com.optic.ecommerceappmvvm.domain.model.Team
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
+import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
 import retrofit2.Response
@@ -21,4 +22,10 @@ interface TeamRemoteDataSource {
     suspend fun createFollowedPlayer(playerId: Int): Response<FollowedPlayerResponse>
     suspend fun getFollowedPlayers(): Response<List<Player>>
     suspend fun deleteFollowedPlayer(playerId: Int): Response<DefaultResponse>
+
+
+  //TEAM SEGUIDOS
+    suspend fun createFollowedTeam(playerId: Int): Response<FollowedTeamResponse>
+    suspend fun getFollowedTeams(): Response<List<Team>>
+    suspend fun deleteFollowedTeam(playerId: Int): Response<DefaultResponse>
 }

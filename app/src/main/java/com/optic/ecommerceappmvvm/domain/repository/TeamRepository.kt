@@ -4,6 +4,7 @@ import com.optic.ecommerceappmvvm.domain.model.League.League
 import com.optic.ecommerceappmvvm.domain.model.player.Player
 import com.optic.ecommerceappmvvm.domain.model.Team
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
+import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
 import com.optic.ecommerceappmvvm.domain.util.Resource
@@ -20,4 +21,10 @@ interface TeamRepository {
     suspend fun getFollowedPlayers(): Flow<Resource<List<Player>>>
     suspend fun createFollowedPlayer(playerId: Int):Flow<Resource<FollowedPlayerResponse>>
     suspend fun deleteFollowedPlayer(playerId: Int):Flow<Resource<DefaultResponse>>
+
+
+    //TEAMS SEGUIDOS
+    suspend fun getFollowedTeams(): Flow<Resource<List<Team>>>
+    suspend fun createFollowedTeam(teamId: Int):Flow<Resource<FollowedTeamResponse>>
+    suspend fun deleteFollowedTeam(teamId: Int):Flow<Resource<DefaultResponse>>
 }
