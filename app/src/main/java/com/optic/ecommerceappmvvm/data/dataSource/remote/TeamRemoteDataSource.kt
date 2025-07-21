@@ -25,7 +25,7 @@ interface TeamRemoteDataSource {
 
 
   //TEAM SEGUIDOS
-    suspend fun createFollowedTeam(playerId: Int): Response<FollowedTeamResponse>
+    suspend fun createFollowedTeam(teamId: Int): Response<FollowedTeamResponse>
     suspend fun getFollowedTeams(): Response<List<Team>>
-    suspend fun deleteFollowedTeam(playerId: Int): Response<DefaultResponse>
+    suspend fun deleteFollowedTeam(teamId: Int): Response<DefaultResponse>
 }

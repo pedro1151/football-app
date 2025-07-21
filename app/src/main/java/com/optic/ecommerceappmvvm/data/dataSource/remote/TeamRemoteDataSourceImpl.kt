@@ -34,7 +34,7 @@ class TeamRemoteDataSourceImpl (private val teamService: TeamService): TeamRemot
 
     override suspend fun getFollowedTeams(): Response<List<Team>> = teamService.getFollowedTeams()
 
-    override suspend fun deleteFollowedTeam(playerId: Int): Response<DefaultResponse> = teamService.deleteFollowedPlayer(playerId)
+    override suspend fun deleteFollowedTeam(teamId: Int): Response<DefaultResponse> = teamService.deleteFollowedTeam(teamId)
 
 
 }

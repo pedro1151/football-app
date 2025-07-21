@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val themeModeState = remember { mutableStateOf(AppThemeMode.LIGHT) }
+            val themeModeState = remember { mutableStateOf(AppThemeMode.DARK) }
 
             CompositionLocalProvider (LocalAppTheme provides themeModeState) {
                 EcommerceAppMVVMTheme(themeMode = themeModeState.value) {

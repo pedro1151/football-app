@@ -56,6 +56,9 @@ fun PlayerStatisticCard(stat: PlayerStats) {
             .fillMaxWidth()
             .clickable { expanded = !expanded },
         elevation = CardDefaults.cardElevation(8.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        ),
         shape = RoundedCornerShape(16.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {

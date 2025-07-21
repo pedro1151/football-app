@@ -53,7 +53,7 @@ private val DarkColorScheme = darkColorScheme(
 
 @Composable
 fun EcommerceAppMVVMTheme(
-    themeMode: AppThemeMode = AppThemeMode.LIGHT,
+    themeMode: AppThemeMode = AppThemeMode.DARK,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when (themeMode) {
