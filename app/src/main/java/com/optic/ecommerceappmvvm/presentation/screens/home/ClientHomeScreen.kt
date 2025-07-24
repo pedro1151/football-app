@@ -22,7 +22,7 @@ fun ClientHomeScreen(navController: NavHostController = rememberNavController())
 
     // Rutas donde se debe mostrar el BottomBar
     val bottomBarRoutes = listOf(
-        ClientScreen.TeamList.route,
+        ClientScreen.Matches.route,
         ClientScreen.Leagues.route,
         ClientScreen.Mas.route,
         ClientScreen.Profile.route,

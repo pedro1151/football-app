@@ -6,6 +6,7 @@ import com.optic.ecommerceappmvvm.data.dataSource.remote.TeamRemoteDataSource
 import com.optic.ecommerceappmvvm.domain.model.League.League
 import com.optic.ecommerceappmvvm.domain.model.player.Player
 import com.optic.ecommerceappmvvm.domain.model.Team
+import com.optic.ecommerceappmvvm.domain.model.fixture.FixtureResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
@@ -101,6 +102,17 @@ class TeamRepositoryImpl(
         emit(
             ResponseToRequest.send(
                 teamRemoteDataSource.deleteFollowedTeam(teamId)
+            )
+        )
+    }
+
+    override suspend fun getFixtureFollowedTeams(
+        season: Int,
+        date: String
+    ): Flow<Resource<List<FixtureResponse>>> = flow{
+        emit(
+            ResponseToRequest.send(
+                teamRemoteDataSource.getFixtureFollowedTeams(season, date)
             )
         )
     }

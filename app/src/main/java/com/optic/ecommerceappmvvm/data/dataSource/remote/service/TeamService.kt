@@ -3,6 +3,7 @@ package com.optic.ecommerceappmvvm.data.dataSource.remote.service
 import com.optic.ecommerceappmvvm.domain.model.League.League
 import com.optic.ecommerceappmvvm.domain.model.player.Player
 import com.optic.ecommerceappmvvm.domain.model.Team
+import com.optic.ecommerceappmvvm.domain.model.fixture.FixtureResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerRequest
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamRequest
@@ -76,6 +77,14 @@ interface TeamService {
     suspend fun deleteFollowedTeam(
         @Path("team_id") teamId: Int
     ): Response<DefaultResponse>
+
+    // MATCHES ( FIXTURES ) POR TEAMS SEGUUIDOS
+
+    @GET("football/getFixtureFollowedTeams")
+    suspend fun getFixtureFollowedTeams(
+        @Query("season") season: Int,
+        @Query("date") date: String
+    ): Response<List<FixtureResponse>>
 
 
 }

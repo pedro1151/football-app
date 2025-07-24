@@ -17,6 +17,7 @@ import com.optic.ecommerceappmvvm.domain.useCase.team.GetPlayerStatsUseCase
 import com.optic.ecommerceappmvvm.domain.useCase.team.GetPlayersUseCase
 import com.optic.ecommerceappmvvm.domain.useCase.team.GetallTeamUseCase
 import com.optic.ecommerceappmvvm.domain.useCase.team.TeamUseCase
+import com.optic.ecommerceappmvvm.domain.useCase.team.fixture.GetFixtureFollowedTeamsUC
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,7 +48,8 @@ object UseCaseModule {
 
         getFollowedTeamsUC = GetFollowedTeamsUC(teamRepository),
         createFollowedTeamUC = CreateFollowedTeamUC(teamRepository),
-        deleteFollowedTeamUC =   DeleteFollowedTeamUC(teamRepository)
+        deleteFollowedTeamUC =   DeleteFollowedTeamUC(teamRepository),
+        getFixtureFollowedTeamsUC = GetFixtureFollowedTeamsUC(teamRepository)
 
     )
 

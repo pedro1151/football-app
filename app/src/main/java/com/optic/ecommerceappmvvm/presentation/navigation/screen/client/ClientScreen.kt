@@ -23,9 +23,9 @@ sealed class ClientScreen(
         title = "Ligas",
         icon = Icons.Default.AccountCircle
     )
-    object TeamList: ClientScreen(
-        route = "client/teams/list",
-        title = "Teams",
+    object Matches: ClientScreen(
+        route = "client/matches",
+        title = "Matches",
         icon = Icons.Default.Share
     )
 

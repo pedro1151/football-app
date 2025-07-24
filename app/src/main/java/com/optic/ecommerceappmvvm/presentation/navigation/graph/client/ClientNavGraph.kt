@@ -15,6 +15,7 @@ import com.optic.ecommerceappmvvm.presentation.screens.follow.FollowScreen
 import com.optic.ecommerceappmvvm.presentation.screens.leagues.LeagueScreen
 import com.optic.ecommerceappmvvm.presentation.screens.leagues.LeagueViewModel
 import com.optic.ecommerceappmvvm.presentation.screens.mas.MasScreen
+import com.optic.ecommerceappmvvm.presentation.screens.matches.FixtureScreen
 import com.optic.ecommerceappmvvm.presentation.screens.profile.info.ProfileScreen
 
 @Composable
@@ -22,11 +23,11 @@ fun ClientNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
         route = Graph.CLIENT,
-        startDestination = ClientScreen.TeamList.route
+        startDestination = ClientScreen.Matches.route
     ) {
 
-        composable(route = ClientScreen.TeamList.route) {
-            TeamListScreen(navController)
+        composable(route = ClientScreen.Matches.route) {
+            FixtureScreen(navController)
         }
 
         composable(route = ClientScreen.Follow.route) {

@@ -12,7 +12,7 @@ import com.optic.ecommerceappmvvm.presentation.navigation.screen.client.ClientSc
 fun ClientBottomBar(navController: NavHostController) {
 
     val screens = listOf(
-        ClientScreen.TeamList,
+        ClientScreen.Matches,
         ClientScreen.Leagues,
         ClientScreen.Follow,
         ClientScreen.Profile,
