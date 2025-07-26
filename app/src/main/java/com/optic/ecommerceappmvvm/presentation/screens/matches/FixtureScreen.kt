@@ -36,8 +36,20 @@ fun FixtureScreen(navController: NavHostController) {
         viewModel.getFixtureFollowedTeams(season = 2023, date = "2023-09-17")
     }
 
-    FixtureContent(
-        navController = navController,
-        fixtureState = fixtureState
-    )
+
+    Scaffold(
+        topBar = {
+            PrimaryTopBar(
+                navController = navController,
+                title = "SMARTF"
+            )
+        },
+        containerColor = GreyLight
+    ) { paddingValues ->
+        FixtureContent(
+            modifier = Modifier.padding(paddingValues),
+            navController = navController,
+            fixtureState = fixtureState
+        )
+    }
 }

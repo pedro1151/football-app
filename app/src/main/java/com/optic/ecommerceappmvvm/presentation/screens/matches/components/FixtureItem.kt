@@ -17,8 +17,10 @@ import androidx.compose.ui.platform.LocalContext
 @Composable
 fun FixtureItem(fixture: FixtureResponse) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 4.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
 
@@ -31,10 +33,10 @@ fun FixtureItem(fixture: FixtureResponse) {
                         .build(),
                     contentDescription = fixture.league?.name,
                     modifier = Modifier
-                        .size(20.dp)
+                        .size(16.dp)
                         .clip(CircleShape)
                 )
-                Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(6.dp))
                 Text(
                     text = fixture.league?.name ?: "Unknown League",
                     style = MaterialTheme.typography.labelSmall,
@@ -42,31 +44,35 @@ fun FixtureItem(fixture: FixtureResponse) {
                 )
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
             // Equipos y resultado
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                // Home team: logo + name
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     AsyncImage(
                         model = fixture.teamHome?.logo,
                         contentDescription = fixture.teamHome?.name,
                         modifier = Modifier
-                            .size(36.dp)
+                            .size(20.dp)
                             .clip(CircleShape)
                     )
+                    Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = fixture.teamHome?.name ?: "",
-                        style = MaterialTheme.typography.bodyMedium
+                        style = MaterialTheme.typography.labelSmall
                     )
                 }
 
+                // Score
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
                         text = "${fixture.goalsHome ?: "-"} : ${fixture.goalsAway ?: "-"}",
-                        style = MaterialTheme.typography.titleMedium
+                        style = MaterialTheme.typography.bodyMedium
                     )
                     Text(
                         text = fixture.statusShort ?: "TBD",
@@ -74,29 +80,22 @@ fun FixtureItem(fixture: FixtureResponse) {
                     )
                 }
 
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                // Away team: logo + name
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = fixture.teamAway?.name ?: "",
+                        style = MaterialTheme.typography.labelSmall
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
                     AsyncImage(
                         model = fixture.teamAway?.logo,
                         contentDescription = fixture.teamAway?.name,
                         modifier = Modifier
-                            .size(36.dp)
+                            .size(20.dp)
                             .clip(CircleShape)
-                    )
-                    Text(
-                        text = fixture.teamAway?.name ?: "",
-                        style = MaterialTheme.typography.bodyMedium
                     )
                 }
             }
-
-            Spacer(modifier = Modifier.height(6.dp))
-
-            // Fecha
-            Text(
-                text = fixture.date.substringBefore("T").replace("-", "/"),
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.outline
-            )
         }
     }
 }
