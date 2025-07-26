@@ -38,7 +38,7 @@ fun LeagueScreen(navController: NavHostController) {
         topBar = {
             PrimaryTopBar(
                 navController = navController,
-                title = "Ligas"
+                title = "Ligas Pedro"
             )
         } ,
         containerColor = GreyLight
