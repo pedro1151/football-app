@@ -30,7 +30,7 @@ fun FixtureContent(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Text(
-            text = "Siguiendo",
+            text = "Cambio Edgar",
             style = MaterialTheme.typography.bodyMedium.copy(
                 fontSize = 12.sp,
                 color = MaterialTheme.colorScheme.primary
