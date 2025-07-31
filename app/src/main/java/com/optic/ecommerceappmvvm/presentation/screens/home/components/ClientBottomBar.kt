@@ -1,8 +1,12 @@
 package com.optic.ecommerceappmvvm.presentation.screens.home.components
 
+import androidx.compose.foundation.background
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.optic.ecommerceappmvvm.presentation.navigation.Graph
@@ -28,7 +32,10 @@ fun ClientBottomBar(navController: NavHostController) {
     }
 
     if (bottomBarDestination) {
-        NavigationBar {
+        NavigationBar (
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            tonalElevation = 0.dp
+        ){
             screens.forEach { screen ->
                 ClientBottomBarItem(
                     screen = screen,

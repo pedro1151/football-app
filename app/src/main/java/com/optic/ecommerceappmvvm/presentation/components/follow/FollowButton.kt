@@ -17,7 +17,9 @@ import com.optic.ecommerceappmvvm.presentation.ui.theme.followTextColor
 fun FollowButton(
     onClick: () -> Unit = {},
     title: String = "Seguir",
+    isFollowed: Boolean = true
 ) {
+    val title_aux = if (isFollowed) "Eliminar" else "Seguir"
     Button(
         onClick = onClick,
         shape = RoundedCornerShape(30),
@@ -28,7 +30,7 @@ fun FollowButton(
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.secondary) // 👈 Contorno blanco
     ) {
         Text(
-            text = title,
+            text = title_aux,
             style = MaterialTheme.typography.labelSmall.copy(fontSize = 12.sp),
             color = MaterialTheme.colorScheme.followTextColor
         )

@@ -1,41 +1,33 @@
 package com.optic.ecommerceappmvvm.presentation.screens.leagues
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
 import com.optic.ecommerceappmvvm.domain.model.League.League
-import com.optic.ecommerceappmvvm.presentation.screens.leagues.LeagueViewModel
+import com.optic.ecommerceappmvvm.presentation.screens.leagues.components.LeagueCard
 import com.optic.ecommerceappmvvm.presentation.screens.leagues.components.LeagueSearchBar
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
+// CONTENIDO PRINCIPAL
 fun LeagueContent(
     modifier: Modifier = Modifier,
     leagues: List<League>,
+    followedLeagues: List<League>,
     paddingValues: PaddingValues,
     viewModel: LeagueViewModel
 ) {
     var query by remember { mutableStateOf("") }
 
-    // Ejecutar solo una vez al montar el Composable para traer todas las ligas inicialmente
-    LaunchedEffect(Unit) {
-        viewModel.getLeagues()
-    }
-
-    // Observa los cambios en query, con debounce y sin cancelar corrutinas previas
     LaunchedEffect(Unit) {
         snapshotFlow { query }
             .debounce(400)
@@ -58,68 +50,93 @@ fun LeagueContent(
             .padding(paddingValues)
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
-
     ) {
         LeagueSearchBar(
             query = query,
             onQueryChange = { query = it }
         )
-        /*
-        OutlinedTextField(
-            value = query,
-            onValueChange = { query = it },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 8.dp),
-            placeholder = { Text("Buscar ligas") },
-            singleLine = true
-        )
-
-         */
 
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
-
         ) {
-            items(leagues) { league ->
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(60.dp)
-                        .padding(horizontal = 8.dp),
-                    shape = RoundedCornerShape(16.dp),
+            if (followedLeagues.isNotEmpty()) {
+                item {
+                    Text(
+                        text = "Ligas que sigues",
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.padding(horizontal = 12.dp)
+                    )
+                }
 
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.primaryContainer
-                    ),
+                items(
+                    items = followedLeagues,
+                    key = { it.id }
+                ) { league ->
+                    var visible by remember { mutableStateOf(true) }
 
+                    LaunchedEffect(league) {
+                        visible = true
+                    }
 
-                    elevation = CardDefaults.cardElevation(0.dp)
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .padding(12.dp)
-                            .fillMaxSize(),
-                        verticalAlignment = Alignment.CenterVertically
+                    AnimatedVisibility(
+                        visible = visible,
+                        modifier = Modifier.animateItemPlacement()
                     ) {
-                        AsyncImage(
-                            model = league.logo,
-                            contentDescription = "Logo de ${league.name}",
-                            modifier = Modifier
-                                .size(36.dp)
-                                .clip(CircleShape)
-                        )
-
-                        Spacer(modifier = Modifier.width(16.dp))
-
-                        Text(
-                            text = league.name,
-                            style = MaterialTheme.typography.bodyMedium.copy(fontSize = 13.sp),
-                            color = MaterialTheme.colorScheme.onSurface
+                        val coroutineScope = rememberCoroutineScope()
+                        LeagueCard(
+                            league = league,
+                            isFollowed = true,
+                            onFollowClick = {
+                            visible = false
+                            coroutineScope.launch {
+                                kotlinx.coroutines.delay(200)
+                                viewModel.deleteFollowedLeague(league.id)
+                            }
+                        }
                         )
                     }
+                }
+
+                item {
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = "Explorar más ligas",
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.padding(horizontal = 12.dp)
+                    )
+                }
+            }
+
+            val remainingLeagues = leagues.filterNot { l -> followedLeagues.any { it.id == l.id } }
+
+            items(
+                items = remainingLeagues,
+                key = { it.id }
+            ) { league ->
+                var visible by remember { mutableStateOf(true) }
+
+                LaunchedEffect(league) {
+                    visible = true
+                }
+
+                AnimatedVisibility(
+                    visible = visible,
+                    modifier = Modifier.animateItemPlacement()
+                ) {
+                    val coroutineScope = rememberCoroutineScope()
+                    LeagueCard(
+                        league = league,
+                        isFollowed = false,
+                        onFollowClick = {
+                            visible = false
+                            coroutineScope.launch {
+                                kotlinx.coroutines.delay(200)
+                                viewModel.createFollowedLeague(league.id)
+                            }
+                        }
+                    )
                 }
             }
         }

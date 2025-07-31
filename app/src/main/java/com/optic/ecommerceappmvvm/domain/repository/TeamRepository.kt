@@ -4,6 +4,7 @@ import com.optic.ecommerceappmvvm.domain.model.League.League
 import com.optic.ecommerceappmvvm.domain.model.player.Player
 import com.optic.ecommerceappmvvm.domain.model.Team
 import com.optic.ecommerceappmvvm.domain.model.fixture.FixtureResponse
+import com.optic.ecommerceappmvvm.domain.model.followed.FollowedLeagueResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
@@ -28,6 +29,12 @@ interface TeamRepository {
     suspend fun getFollowedTeams(): Flow<Resource<List<Team>>>
     suspend fun createFollowedTeam(teamId: Int):Flow<Resource<FollowedTeamResponse>>
     suspend fun deleteFollowedTeam(teamId: Int):Flow<Resource<DefaultResponse>>
+
+
+    //ligas SEGUIDOS
+    suspend fun getFollowedLeagues(): Flow<Resource<List<League>>>
+    suspend fun createFollowedLeague(leagueId: Int):Flow<Resource<FollowedLeagueResponse>>
+    suspend fun deleteFollowedLeague(leagueId: Int):Flow<Resource<DefaultResponse>>
 
 
     //MATCHES ( FIXTURE )

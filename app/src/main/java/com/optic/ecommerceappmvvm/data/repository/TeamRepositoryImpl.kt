@@ -7,6 +7,7 @@ import com.optic.ecommerceappmvvm.domain.model.League.League
 import com.optic.ecommerceappmvvm.domain.model.player.Player
 import com.optic.ecommerceappmvvm.domain.model.Team
 import com.optic.ecommerceappmvvm.domain.model.fixture.FixtureResponse
+import com.optic.ecommerceappmvvm.domain.model.followed.FollowedLeagueResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
@@ -105,6 +106,32 @@ class TeamRepositoryImpl(
             )
         )
     }
+
+    // ligas seguidas
+    override suspend fun getFollowedLeagues(): Flow<Resource<List<League>>> = flow{
+        emit(
+            ResponseToRequest.send(
+                teamRemoteDataSource.getFollowedLeagues()
+            )
+        )
+    }
+    override suspend fun createFollowedLeague(leagueId: Int): Flow<Resource<FollowedLeagueResponse>>  = flow{
+        emit(
+            ResponseToRequest.send(
+                teamRemoteDataSource.createFollowedLeague(leagueId)
+            )
+        )
+    }
+
+    override suspend fun deleteFollowedLeague(leagueId: Int): Flow<Resource<DefaultResponse>> = flow{
+        emit(
+            ResponseToRequest.send(
+                teamRemoteDataSource.deleteFollowedLeague(leagueId)
+            )
+        )
+    }
+
+    // FIXTURES
 
     override suspend fun getFixtureFollowedTeams(
         season: Int,

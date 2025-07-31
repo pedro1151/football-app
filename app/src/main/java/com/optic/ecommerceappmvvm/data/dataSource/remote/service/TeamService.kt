@@ -4,6 +4,8 @@ import com.optic.ecommerceappmvvm.domain.model.League.League
 import com.optic.ecommerceappmvvm.domain.model.player.Player
 import com.optic.ecommerceappmvvm.domain.model.Team
 import com.optic.ecommerceappmvvm.domain.model.fixture.FixtureResponse
+import com.optic.ecommerceappmvvm.domain.model.followed.FollowedLeagueRequest
+import com.optic.ecommerceappmvvm.domain.model.followed.FollowedLeagueResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerRequest
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamRequest
@@ -85,6 +87,23 @@ interface TeamService {
         @Query("season") season: Int,
         @Query("date") date: String
     ): Response<List<FixtureResponse>>
+
+
+    // PARA SEGUIR LIGAS
+
+    @POST("football/createFollowedLeague")
+    suspend fun createFollowedLeague(
+        @Body request: FollowedLeagueRequest
+    ): Response<FollowedLeagueResponse>
+
+    @GET("football/getFollowedLeagues")
+    suspend fun getFollowedLeagues(
+    ): Response<List<League>>
+
+    @DELETE("football/deleteFollowedLeague/{league_id}")
+    suspend fun deleteFollowedLeague(
+        @Path("league_id") leagueId: Int
+    ): Response<DefaultResponse>
 
 
 }

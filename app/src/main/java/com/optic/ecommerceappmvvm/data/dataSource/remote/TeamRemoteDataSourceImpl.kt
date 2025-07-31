@@ -5,6 +5,8 @@ import com.optic.ecommerceappmvvm.domain.model.League.League
 import com.optic.ecommerceappmvvm.domain.model.player.Player
 import com.optic.ecommerceappmvvm.domain.model.Team
 import com.optic.ecommerceappmvvm.domain.model.fixture.FixtureResponse
+import com.optic.ecommerceappmvvm.domain.model.followed.FollowedLeagueRequest
+import com.optic.ecommerceappmvvm.domain.model.followed.FollowedLeagueResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerRequest
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamRequest
@@ -36,6 +38,16 @@ class TeamRemoteDataSourceImpl (private val teamService: TeamService): TeamRemot
     override suspend fun getFollowedTeams(): Response<List<Team>> = teamService.getFollowedTeams()
 
     override suspend fun deleteFollowedTeam(teamId: Int): Response<DefaultResponse> = teamService.deleteFollowedTeam(teamId)
+
+
+    // FOLLOWED LEAGUES
+    override suspend fun createFollowedLeague(leagueId: Int): Response<FollowedLeagueResponse> = teamService.createFollowedLeague(
+        FollowedLeagueRequest(leagueId)
+    )
+
+    override suspend fun getFollowedLeagues(): Response<List<League>> = teamService.getFollowedLeagues()
+
+    override suspend fun deleteFollowedLeague(leagueId: Int): Response<DefaultResponse> = teamService.deleteFollowedLeague(leagueId)
 
     // MATCHES ( FIXTURES)
     override suspend fun getFixtureFollowedTeams(

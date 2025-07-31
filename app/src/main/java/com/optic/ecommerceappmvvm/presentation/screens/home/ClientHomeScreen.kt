@@ -3,6 +3,7 @@ package com.optic.ecommerceappmvvm.presentation.screens.home
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.compose.runtime.Composable
@@ -32,6 +33,7 @@ fun ClientHomeScreen(navController: NavHostController = rememberNavController())
     val shouldShowBottomBar = currentDestination?.route in bottomBarRoutes
 
     Scaffold(
+        containerColor = MaterialTheme.colorScheme.primaryContainer,
         bottomBar = {
             if (shouldShowBottomBar) {
                 ClientBottomBar(navController = navController)

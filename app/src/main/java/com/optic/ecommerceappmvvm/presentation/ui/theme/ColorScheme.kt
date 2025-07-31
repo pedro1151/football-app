@@ -19,6 +19,9 @@ val SelectedIconColorLight = Grafito
 val SelectedTextColorDark = Color(0XFF2dad0D)
 val SelectedIconColorDark = Color(0XFF2dad0D)
 
+val IconColorDark = Color(0xFFFF4D4D)
+val IconColorLight = Color(0xFFFF4D4D)
+
 val ColorScheme.followButtonBackground: Color
     @Composable get() = when (LocalAppTheme.current.value) {
         AppThemeMode.DARK -> FollowButtonBackgroundDark
@@ -42,4 +45,10 @@ val ColorScheme.selectedIconColor: Color
     @Composable get() = when (LocalAppTheme.current.value) {
         AppThemeMode.DARK -> SelectedIconColorDark
         AppThemeMode.LIGHT -> SelectedIconColorLight
+    }
+
+val ColorScheme.IconSecondaryColor: Color
+    @Composable get() = when (LocalAppTheme.current.value) {
+        AppThemeMode.DARK -> IconColorDark
+        AppThemeMode.LIGHT -> IconColorLight
     }
