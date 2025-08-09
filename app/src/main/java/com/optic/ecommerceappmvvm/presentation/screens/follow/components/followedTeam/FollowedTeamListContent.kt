@@ -76,7 +76,7 @@ fun FollowedTeamListContent(
                             .clip(RoundedCornerShape(16.dp))
                             .clickable {
                                 player.id?.let {
-                                    navController.navigate("${Graph.PLAYER}/$it")
+                                    navController.navigate("${Graph.TEAM}/$it")
                                 }
                             },
                         shape = RoundedCornerShape(16.dp)

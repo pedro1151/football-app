@@ -17,6 +17,7 @@ import com.optic.ecommerceappmvvm.presentation.screens.leagues.LeagueViewModel
 import com.optic.ecommerceappmvvm.presentation.screens.mas.MasScreen
 import com.optic.ecommerceappmvvm.presentation.screens.matches.FixtureScreen
 import com.optic.ecommerceappmvvm.presentation.screens.profile.info.ProfileScreen
+import com.optic.ecommerceappmvvm.presentation.screens.team.TeamScreen
 
 @Composable
 fun ClientNavGraph(navController: NavHostController) {
@@ -51,6 +52,14 @@ fun ClientNavGraph(navController: NavHostController) {
             val playerId = backStackEntry.arguments?.getString("playerId")?.toInt() ?: 0
             PlayerStatsScreen(navController = navController, playerId = playerId)
         }
+
+        composable(route = Graph.TEAM + "/{teamId}"
+        ) { backStackEntry ->
+            val teamId = backStackEntry.arguments?.getString("teamId")?.toInt() ?: 0
+            TeamScreen(navController = navController, teamId = teamId)
+        }
+
+
 
 
         ProfileNavGraph(navController)

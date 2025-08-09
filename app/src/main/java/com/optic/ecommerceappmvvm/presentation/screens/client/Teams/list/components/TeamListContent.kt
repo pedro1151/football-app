@@ -1,5 +1,6 @@
 package com.optic.ecommerceappmvvm.presentation.screens.client.Teams.list.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -21,6 +22,7 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.optic.ecommerceappmvvm.domain.model.Team
 import com.optic.ecommerceappmvvm.presentation.components.follow.FollowButton
+import com.optic.ecommerceappmvvm.presentation.navigation.Graph
 
 
 @Composable
@@ -43,7 +45,12 @@ fun TeamListContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(70.dp)
-                    .padding(horizontal = 8.dp),
+                    .padding(horizontal = 8.dp)
+                    .clickable {
+                        team.id?.let {
+                            navController.navigate("${Graph.TEAM}/$it")
+                        }
+                    },
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surface

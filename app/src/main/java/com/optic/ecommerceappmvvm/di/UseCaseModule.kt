@@ -17,6 +17,7 @@ import com.optic.ecommerceappmvvm.domain.useCase.team.GetPlayerStatsUseCase
 import com.optic.ecommerceappmvvm.domain.useCase.team.GetPlayersUseCase
 import com.optic.ecommerceappmvvm.domain.useCase.team.GetallTeamUseCase
 import com.optic.ecommerceappmvvm.domain.useCase.team.TeamUseCase
+import com.optic.ecommerceappmvvm.domain.useCase.team.equipos.GetTeamByIdUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.fixture.GetFixtureFollowedTeamsUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.followedLeagues.CreateFollowedLeagueUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.followedLeagues.DeleteFollowedLeagueUC
@@ -57,7 +58,8 @@ object UseCaseModule {
 
         getFollowedLeaguesUC = GetFollowedLeaguesUC(teamRepository),
         createFollowedLeagueUC = CreateFollowedLeagueUC(teamRepository),
-        deleteFollowedLeagueUC = DeleteFollowedLeagueUC(teamRepository)
+        deleteFollowedLeagueUC = DeleteFollowedLeagueUC(teamRepository),
+        getTeamByIdUC = GetTeamByIdUC(teamRepository)
 
     )
 

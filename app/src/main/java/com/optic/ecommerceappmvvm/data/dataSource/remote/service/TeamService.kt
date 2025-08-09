@@ -26,6 +26,11 @@ interface TeamService {
     suspend fun getTeams(
     ): Response<List<Team>>
 
+    @GET("football/teams/{team_id}")
+    suspend fun getTeamById(
+        @Path("team_id") teamId: Int
+    ): Response<Team>
+
 
     @GET("football/getPlayers")
     suspend fun getPlayers(

@@ -9,4 +9,5 @@ object Graph {
     const val ADMIN = "admin_graph"
     const val PROFILE = "profile_graph"
     const val PLAYER = "player_graph"
+    const val TEAM   = "team_graph"
 }

@@ -14,7 +14,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface TeamRepository {
 
+    // teams
     suspend fun getAll(): Flow<Resource<List<Team>>>
+    suspend fun getTeamById(teamId: Int): Flow<Resource<Team>>
+
+    //PLayers
     suspend fun getPlayers(): Flow<Resource<List<Player>>>
     suspend fun getPlayerStats(playerId: Int): Flow<Resource<PlayerWithStats>>
     suspend fun getLeagues(name: String, type: String, countryName: String): Flow<Resource<List<League>>>

@@ -15,7 +15,11 @@ interface TeamRemoteDataSource {
   /* tambien en este archivo de datasource, se responde con Response de retrofit,
    esta aclarcion es util, ya que en las implementaciones se utiliza FLow
    */
+    // Teams
     suspend fun getAll(): Response<List<Team>>
+    suspend fun getTeamById(teamId: Int): Response<Team>
+
+    //Players
     suspend fun getPlayers(): Response<List<Player>>
     suspend fun getPlayerStats(playerId: Int): Response<PlayerWithStats>
     suspend fun getLeagues(name: String, type: String, countryName: String): Response<List<League>>

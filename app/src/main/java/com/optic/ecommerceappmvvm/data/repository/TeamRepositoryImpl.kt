@@ -29,6 +29,14 @@ class TeamRepositoryImpl(
         )
     }
 
+    override suspend fun getTeamById(teamId: Int): Flow<Resource<Team>> = flow{
+        emit(
+            ResponseToRequest.send(
+                teamRemoteDataSource.getTeamById(teamId)
+            )
+        )
+    }
+
     override suspend fun getPlayers(): Flow<Resource<List<Player>>> = flow{
         emit(
             ResponseToRequest.send(
