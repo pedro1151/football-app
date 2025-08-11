@@ -42,6 +42,8 @@ interface TeamRemoteDataSource {
   suspend fun deleteFollowedLeague(leagueId: Int): Response<DefaultResponse>
 
 
-    // MATCHES
+    // FIXTURES
     suspend fun getFixtureFollowedTeams(season: Int, date: String): Response<List<FixtureResponse>>
+    suspend fun getFixtureTeam(teamId: Int): Response<List<FixtureResponse>>
+
 }

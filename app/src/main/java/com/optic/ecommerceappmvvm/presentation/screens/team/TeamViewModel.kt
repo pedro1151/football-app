@@ -6,6 +6,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import androidx.lifecycle.viewModelScope
 import com.optic.ecommerceappmvvm.domain.model.Team
+import com.optic.ecommerceappmvvm.domain.model.fixture.FixtureResponse
 import com.optic.ecommerceappmvvm.domain.util.Resource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,12 +21,25 @@ class TeamViewModel @Inject constructor(
     private val _teamState =  MutableStateFlow<Resource<Team>>(Resource.Loading)
     val teamState: StateFlow<Resource<Team>> = _teamState
 
+    private val _fixtureTeamsState = MutableStateFlow<Resource<List<FixtureResponse>>>(Resource.Loading)
+    val fixtureTeamsState : StateFlow<Resource<List<FixtureResponse>>> = _fixtureTeamsState
+
+
 
 
     fun getTeamById(teamId: Int) {
         viewModelScope.launch {
             teamUseCase.getTeamByIdUC(teamId).collectLatest { result ->
                 _teamState.value = result
+            }
+        }
+    }
+
+
+    fun getFixtureTeam(teamId: Int) {
+        viewModelScope.launch {
+            teamUseCase.getFixtureTeamUC(teamId).collectLatest { result ->
+                _fixtureTeamsState.value = result
             }
         }
     }

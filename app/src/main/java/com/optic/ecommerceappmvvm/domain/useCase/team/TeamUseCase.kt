@@ -2,6 +2,7 @@ package com.optic.ecommerceappmvvm.domain.useCase.team
 
 import com.optic.ecommerceappmvvm.domain.useCase.team.equipos.GetTeamByIdUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.fixture.GetFixtureFollowedTeamsUC
+import com.optic.ecommerceappmvvm.domain.useCase.team.fixture.GetFixtureTeamUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.followedLeagues.CreateFollowedLeagueUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.followedLeagues.DeleteFollowedLeagueUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.followedLeagues.GetFollowedLeaguesUC
@@ -30,6 +31,7 @@ data class TeamUseCase(
 
     // matches ( FIxture)
     val getFixtureFollowedTeamsUC : GetFixtureFollowedTeamsUC,
+    val getFixtureTeamUC : GetFixtureTeamUC,
 
 
     // UC LEAGUES SEGUIDOS

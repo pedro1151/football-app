@@ -24,10 +24,13 @@ fun TeamScreen(
     val viewModel: TeamViewModel = hiltViewModel()
 
     val state by viewModel.teamState.collectAsState()
+    val fixtureState by viewModel.fixtureTeamsState.collectAsState()
 
     // Llamar a la función solo una vez al inicio
     LaunchedEffect(teamId) {
         viewModel.getTeamById  (teamId)
+        // Llamamos la función cuando entra la pantalla
+        viewModel.getFixtureTeam (teamId)
     }
 
 
@@ -45,7 +48,12 @@ fun TeamScreen(
 
             is Resource.Success -> {
                 val data = (state as Resource.Success).data
-                TeamContent(paddingValues, data, navController)
+                TeamContent(
+                    paddingValues = paddingValues,
+                    team = data,
+                    fixtureState = fixtureState,
+                    navController
+                )
             }
 
             is Resource.Failure -> {

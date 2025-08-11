@@ -18,8 +18,8 @@ import androidx.compose.ui.platform.LocalContext
 fun FixtureItem(fixture: FixtureResponse) {
     Card(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 4.dp),
+            .fillMaxWidth(),
+            //.padding(vertical = 4.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
     ) {
         Column(modifier = Modifier.padding(12.dp)) {

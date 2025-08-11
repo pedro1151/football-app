@@ -93,6 +93,12 @@ interface TeamService {
         @Query("date") date: String
     ): Response<List<FixtureResponse>>
 
+    //Fixture de un equipo en general
+    @GET("football/fixtures/team/{team_id}")
+    suspend fun getFixtureTeam(
+        @Path("team_id") teamId: Int
+    ): Response<List<FixtureResponse>>
+
 
     // PARA SEGUIR LIGAS
 

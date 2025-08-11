@@ -3,7 +3,7 @@ package com.optic.ecommerceappmvvm.core
 object Config {
 
    // const val BASE_URL = "http://192.168.100.103:8000/"
-    const val BASE_URL = "http://10.232.119.136:8000/"
+    const val BASE_URL = "http://10.0.2.2:8000/"
 
    // const val BASE_URL_TEAMS = "http://192.168.100.103:8004/"
     const val BASE_URL_TEAMS = "http://10.232.119.136:8004/"

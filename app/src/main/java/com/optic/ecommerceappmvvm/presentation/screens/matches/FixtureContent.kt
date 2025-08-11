@@ -30,7 +30,8 @@ import com.optic.ecommerceappmvvm.presentation.ui.theme.IconSecondaryColor
 fun FixtureContent(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    fixtureState: Resource<List<FixtureResponse>>
+    fixtureState: Resource<List<FixtureResponse>>,
+    title: String = "Siguiendo"
 ) {
     var expanded by remember { mutableStateOf(true) }
 
@@ -44,7 +45,7 @@ fun FixtureContent(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { expanded = !expanded }
+                .clickable { expanded = !expanded },
                 /*
                 .border(
 
@@ -53,17 +54,20 @@ fun FixtureContent(
                     shape = MaterialTheme.shapes.medium.copy(bottomEnd = CornerSize(0.dp), bottomStart = CornerSize(0.dp))
                 )
                  */
-                .padding(horizontal = 12.dp, vertical = 8.dp),
+               // .padding(horizontal = 12.dp, vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                imageVector = Icons.Default.Star,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.IconSecondaryColor
-            )
+            if (title == "Siguiendo") {
+                Icon(
+                    imageVector = Icons.Default.Star,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.IconSecondaryColor
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+            }
             Spacer(modifier = Modifier.width(8.dp))
             Text(
-                text = "Siguiendo",
+                text = title,
                 style = MaterialTheme.typography.bodyMedium.copy(
                     fontSize = 15.sp,
                     color = MaterialTheme.colorScheme.primary
@@ -82,7 +86,7 @@ fun FixtureContent(
                 }
 
                 is Resource.Success -> {
-                    LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    LazyColumn(verticalArrangement = Arrangement.spacedBy(1.dp)) {
                         items(fixtureState.data ?: emptyList()) { fixture ->
                             FixtureItem(fixture = fixture)
                         }

@@ -13,9 +13,13 @@ import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.optic.ecommerceappmvvm.domain.model.Team
+import com.optic.ecommerceappmvvm.domain.model.fixture.FixtureResponse
+import com.optic.ecommerceappmvvm.domain.util.Resource
 
 import com.optic.ecommerceappmvvm.presentation.screens.client.playerStats.components.PlaceholderTab
+import com.optic.ecommerceappmvvm.presentation.screens.matches.FixtureContent
 import com.optic.ecommerceappmvvm.presentation.screens.team.components.TeamHeader
 import kotlinx.coroutines.launch
 
@@ -24,7 +28,8 @@ import kotlinx.coroutines.launch
 fun TeamContent(
     paddingValues: PaddingValues,
     team: Team,
-    navController: NavController
+    fixtureState: Resource<List<FixtureResponse>>,
+    navController: NavHostController
 ) {
     val tabTitles = listOf("Resumen", "Formacion", "Partidos", "Estadisticas", "Trofeos", "Novedades")
     val pagerState = rememberPagerState(pageCount = { tabTitles.size })
@@ -38,16 +43,17 @@ fun TeamContent(
     ) {
         TeamHeader(team, paddingValues)
 
-        TabRow(
+        ScrollableTabRow(
             selectedTabIndex = pagerState.currentPage,
             containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.primary
+            contentColor = MaterialTheme.colorScheme.primary,
+            edgePadding = 16.dp
         ) {
             tabTitles.forEachIndexed { index, title ->
                 Tab(
                     selected = pagerState.currentPage == index,
                     onClick = {
-                        coroutineScope.launch{
+                        coroutineScope.launch {
                             pagerState.animateScrollToPage(index)
                         }
                     },
@@ -68,7 +74,12 @@ fun TeamContent(
             when (page) {
                 0 -> PlaceholderTab("Resumen")
                 1 -> PlaceholderTab("Formacion")
-                2 -> PlaceholderTab("Partidos")
+                2 -> FixtureContent(
+                    modifier = Modifier.padding(paddingValues),
+                    navController = navController,
+                    fixtureState = fixtureState,
+                    title = "Partidos"
+                )
                 3 -> PlaceholderTab("Estadisticas")
                 4 -> PlaceholderTab("Trofeos")
                 5 -> PlaceholderTab("Novedades")

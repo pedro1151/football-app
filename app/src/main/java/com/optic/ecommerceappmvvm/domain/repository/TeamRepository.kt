@@ -43,4 +43,5 @@ interface TeamRepository {
 
     //MATCHES ( FIXTURE )
     suspend fun getFixtureFollowedTeams(season: Int, date: String): Flow<Resource<List<FixtureResponse>>>
+    suspend fun getFixtureTeam(teamId: Int): Flow<Resource<List<FixtureResponse>>>
 }
