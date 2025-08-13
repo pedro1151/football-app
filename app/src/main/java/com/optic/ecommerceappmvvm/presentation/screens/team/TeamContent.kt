@@ -1,6 +1,8 @@
 package com.optic.ecommerceappmvvm.presentation.screens.team
 
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.layout.*
@@ -21,14 +23,18 @@ import com.optic.ecommerceappmvvm.domain.util.Resource
 import com.optic.ecommerceappmvvm.presentation.screens.client.playerStats.components.PlaceholderTab
 import com.optic.ecommerceappmvvm.presentation.screens.matches.FixtureContent
 import com.optic.ecommerceappmvvm.presentation.screens.team.components.TeamHeader
+import com.optic.ecommerceappmvvm.presentation.screens.team.components.resume.ResumeContent
 import kotlinx.coroutines.launch
 
+@RequiresApi(Build.VERSION_CODES.O)
 @ExperimentalFoundationApi
 @Composable
 fun TeamContent(
     paddingValues: PaddingValues,
     team: Team,
     fixtureState: Resource<List<FixtureResponse>>,
+    nexFixtureState: Resource<FixtureResponse>,
+    topFiveFixtureState: Resource<List<FixtureResponse>>,
     navController: NavHostController
 ) {
     val tabTitles = listOf("Resumen", "Formacion", "Partidos", "Estadisticas", "Trofeos", "Novedades")
@@ -72,7 +78,15 @@ fun TeamContent(
             modifier = Modifier.fillMaxSize()
         ) { page ->
             when (page) {
-                0 -> PlaceholderTab("Resumen")
+                0 -> team?.id?.let {
+                    ResumeContent(
+                        paddingValues = paddingValues,
+                        nextFixtureState = nexFixtureState,
+                        topFiveFixtureState = topFiveFixtureState,
+                        teamId = it,
+                        navController = navController
+                    )
+                }
                 1 -> PlaceholderTab("Formacion")
                 2 -> FixtureContent(
                     modifier = Modifier.padding(paddingValues),

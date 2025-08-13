@@ -159,4 +159,21 @@ class TeamRepositoryImpl(
             )
         )
     }
+
+    override suspend fun getNextFixtureTeam(teamId: Int): Flow<Resource<FixtureResponse>> = flow{
+        emit(
+            ResponseToRequest.send(
+                teamRemoteDataSource.getNextFixtureTeam(teamId)
+            )
+        )
+    }
+
+
+    override suspend fun getTopFiveFixtureTeam(teamId: Int): Flow<Resource<List<FixtureResponse>>> = flow{
+        emit(
+            ResponseToRequest.send(
+                teamRemoteDataSource.getTopFiveFixtureTeam(teamId)
+            )
+        )
+    }
 }

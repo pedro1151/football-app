@@ -25,12 +25,16 @@ fun TeamScreen(
 
     val state by viewModel.teamState.collectAsState()
     val fixtureState by viewModel.fixtureTeamsState.collectAsState()
+    val nextFixtureState by viewModel.nextFixtureTeamsState.collectAsState()
+    val topFiveFixtureState by viewModel.topFiveFixtureTeamsState.collectAsState()
 
     // Llamar a la función solo una vez al inicio
     LaunchedEffect(teamId) {
         viewModel.getTeamById  (teamId)
         // Llamamos la función cuando entra la pantalla
         viewModel.getFixtureTeam (teamId)
+        viewModel.getTopFiveFixtureTeam(teamId)
+        viewModel.getNextFixtureTeam(teamId)
     }
 
 
@@ -52,6 +56,8 @@ fun TeamScreen(
                     paddingValues = paddingValues,
                     team = data,
                     fixtureState = fixtureState,
+                    nexFixtureState = nextFixtureState,
+                    topFiveFixtureState = topFiveFixtureState,
                     navController
                 )
             }

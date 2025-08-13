@@ -1,5 +1,7 @@
 package com.optic.ecommerceappmvvm.presentation.screens.matches
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
@@ -26,6 +28,7 @@ import com.optic.ecommerceappmvvm.domain.util.Resource
 import com.optic.ecommerceappmvvm.presentation.screens.matches.components.FixtureItem
 import com.optic.ecommerceappmvvm.presentation.ui.theme.IconSecondaryColor
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun FixtureContent(
     modifier: Modifier = Modifier,

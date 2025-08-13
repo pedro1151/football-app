@@ -1,4 +1,4 @@
-package com.optic.ecommerceappmvvm.presentation.screens.matches.components
+package com.optic.ecommerceappmvvm.presentation.components.fixture.nextFixture
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -28,7 +28,10 @@ import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun FixtureItem(fixture: FixtureResponse) {
+fun NextFixtureItem(
+    fixture: FixtureResponse,
+    title: String = "Próximo partido",
+) {
     val fixtureDateTime = remember {
         try {
             OffsetDateTime.parse(fixture.date).toLocalDateTime()
@@ -48,9 +51,20 @@ fun FixtureItem(fixture: FixtureResponse) {
 
     Card(
         modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
+        shape = RoundedCornerShape(12.dp)
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
+
+            // Título en esquina superior izquierda
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier
+                    .align(Alignment.Start)
+                    .padding(bottom = 6.dp)
+            )
 
             // Fecha (izquierda) y liga (derecha)
             Row(

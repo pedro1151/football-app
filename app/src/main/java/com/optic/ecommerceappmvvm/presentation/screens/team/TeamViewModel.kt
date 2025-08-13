@@ -24,6 +24,12 @@ class TeamViewModel @Inject constructor(
     private val _fixtureTeamsState = MutableStateFlow<Resource<List<FixtureResponse>>>(Resource.Loading)
     val fixtureTeamsState : StateFlow<Resource<List<FixtureResponse>>> = _fixtureTeamsState
 
+    private val _nextFixtureTeamsState = MutableStateFlow<Resource<FixtureResponse>>(Resource.Loading)
+    val nextFixtureTeamsState : StateFlow<Resource<FixtureResponse>> = _nextFixtureTeamsState
+
+    private val _topFiveFixtureTeamsState = MutableStateFlow<Resource<List<FixtureResponse>>>(Resource.Loading)
+    val topFiveFixtureTeamsState : StateFlow<Resource<List<FixtureResponse>>> = _topFiveFixtureTeamsState
+
 
 
 
@@ -40,6 +46,22 @@ class TeamViewModel @Inject constructor(
         viewModelScope.launch {
             teamUseCase.getFixtureTeamUC(teamId).collectLatest { result ->
                 _fixtureTeamsState.value = result
+            }
+        }
+    }
+
+    fun getNextFixtureTeam(teamId: Int) {
+        viewModelScope.launch {
+            teamUseCase.getNextFixtureTeamUC(teamId).collectLatest { result ->
+                _nextFixtureTeamsState.value = result
+            }
+        }
+    }
+
+    fun getTopFiveFixtureTeam(teamId: Int) {
+        viewModelScope.launch {
+            teamUseCase.getTopFiveFixtureTeamUC(teamId).collectLatest { result ->
+                _topFiveFixtureTeamsState.value = result
             }
         }
     }

@@ -99,6 +99,18 @@ interface TeamService {
         @Path("team_id") teamId: Int
     ): Response<List<FixtureResponse>>
 
+    //Fixture de proximo partido de un EQuipo
+    @GET("football/fixtures/team/{team_id}/next")
+    suspend fun getNextFixtureTeam(
+        @Path("team_id") teamId: Int
+    ): Response<FixtureResponse>
+
+    //Fixture top 5 ultimos partidos finalizados
+    @GET("football/fixtures/team/{team_id}/top5")
+    suspend fun getTopFiveFixtureTeam(
+        @Path("team_id") teamId: Int
+    ): Response<List<FixtureResponse>>
+
 
     // PARA SEGUIR LIGAS
 

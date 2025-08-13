@@ -22,6 +22,10 @@ val SelectedIconColorDark = Color(0XFF2dad0D)
 val IconColorDark = Color(0xFFFF4D4D)
 val IconColorLight = Color(0xFFFF4D4D)
 
+val redColorFixture =  Color(0xFFF44336)
+val greenColorFixture = Color(0xFF4CAF50)
+val grayColorFixture = Color(0xFF4CAF50)
+
 val ColorScheme.followButtonBackground: Color
     @Composable get() = when (LocalAppTheme.current.value) {
         AppThemeMode.DARK -> FollowButtonBackgroundDark
@@ -51,4 +55,16 @@ val ColorScheme.IconSecondaryColor: Color
     @Composable get() = when (LocalAppTheme.current.value) {
         AppThemeMode.DARK -> IconColorDark
         AppThemeMode.LIGHT -> IconColorLight
+    }
+
+val ColorScheme.getRedColorFixture  : Color
+    @Composable get() = when (LocalAppTheme.current.value) {
+        AppThemeMode.DARK -> redColorFixture
+        AppThemeMode.LIGHT -> redColorFixture
+    }
+
+val ColorScheme.getGreenColorFixture  : Color
+    @Composable get() = when (LocalAppTheme.current.value) {
+        AppThemeMode.DARK -> greenColorFixture
+        AppThemeMode.LIGHT -> greenColorFixture
     }

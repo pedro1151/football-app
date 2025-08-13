@@ -44,6 +44,10 @@ interface TeamRemoteDataSource {
 
     // FIXTURES
     suspend fun getFixtureFollowedTeams(season: Int, date: String): Response<List<FixtureResponse>>
+    //Teams
     suspend fun getFixtureTeam(teamId: Int): Response<List<FixtureResponse>>
+    suspend fun getNextFixtureTeam(teamId: Int): Response<FixtureResponse>
+    suspend fun getTopFiveFixtureTeam(teamId: Int): Response<List<FixtureResponse>>
+
 
 }
