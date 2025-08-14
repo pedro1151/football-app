@@ -12,6 +12,7 @@ import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
+import com.optic.ecommerceappmvvm.domain.model.team.TeamResponse
 import com.optic.ecommerceappmvvm.domain.repository.TeamRepository
 import com.optic.ecommerceappmvvm.domain.util.Resource
 import com.optic.ecommerceappmvvm.domain.util.ResponseToRequest
@@ -29,7 +30,7 @@ class TeamRepositoryImpl(
         )
     }
 
-    override suspend fun getTeamById(teamId: Int): Flow<Resource<Team>> = flow{
+    override suspend fun getTeamById(teamId: Int): Flow<Resource<TeamResponse>> = flow{
         emit(
             ResponseToRequest.send(
                 teamRemoteDataSource.getTeamById(teamId)

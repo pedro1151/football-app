@@ -12,9 +12,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.optic.ecommerceappmvvm.domain.model.Team
+import com.optic.ecommerceappmvvm.domain.model.team.TeamResponse
 
 @Composable
-fun TeamHeader(team: Team, paddingValues: PaddingValues) {
+fun TeamHeader(team: TeamResponse, paddingValues: PaddingValues) {
     Column(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.primaryContainer)

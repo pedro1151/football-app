@@ -9,6 +9,7 @@ import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
+import com.optic.ecommerceappmvvm.domain.model.team.TeamResponse
 import com.optic.ecommerceappmvvm.domain.util.Resource
 import kotlinx.coroutines.flow.Flow
 
@@ -16,7 +17,7 @@ interface TeamRepository {
 
     // teams
     suspend fun getAll(): Flow<Resource<List<Team>>>
-    suspend fun getTeamById(teamId: Int): Flow<Resource<Team>>
+    suspend fun getTeamById(teamId: Int): Flow<Resource<TeamResponse>>
 
     //PLayers
     suspend fun getPlayers(): Flow<Resource<List<Player>>>

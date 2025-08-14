@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.optic.ecommerceappmvvm.domain.model.fixture.FixtureResponse
+import com.optic.ecommerceappmvvm.domain.model.team.TeamResponse
 import com.optic.ecommerceappmvvm.domain.util.Resource
 import com.optic.ecommerceappmvvm.presentation.components.fixture.nextFixture.NextFixture
 
@@ -21,7 +22,8 @@ fun ResumeContent(
     nextFixtureState: Resource<FixtureResponse>,
     topFiveFixtureState: Resource<List<FixtureResponse>>,
     teamId: Int,
-    navController: NavHostController
+    navController: NavHostController,
+    team : TeamResponse
 ) {
     LazyColumn(
         modifier = Modifier
@@ -44,6 +46,15 @@ fun ResumeContent(
                 topFiveFixtureState = topFiveFixtureState,
                 teamId = teamId
             )
+        }
+
+        item{
+            team.venue?.let {
+                VenueCard(
+                    venue = it,
+                    modifier = Modifier.padding(paddingValues),
+                )
+            }
         }
 
         // Aquí más adelante puedes agregar otros cards como el top 5

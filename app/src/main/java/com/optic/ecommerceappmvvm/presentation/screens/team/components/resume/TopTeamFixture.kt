@@ -31,7 +31,7 @@ fun TopTeamFixture(
             // Título
             Text(
                 text = "Últimos 5 partidos",
-                style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+                //style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
                     .align(Alignment.Start)

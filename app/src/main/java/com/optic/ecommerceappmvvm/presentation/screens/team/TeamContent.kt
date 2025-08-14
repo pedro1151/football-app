@@ -18,12 +18,14 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.optic.ecommerceappmvvm.domain.model.Team
 import com.optic.ecommerceappmvvm.domain.model.fixture.FixtureResponse
+import com.optic.ecommerceappmvvm.domain.model.team.TeamResponse
 import com.optic.ecommerceappmvvm.domain.util.Resource
 
 import com.optic.ecommerceappmvvm.presentation.screens.client.playerStats.components.PlaceholderTab
 import com.optic.ecommerceappmvvm.presentation.screens.matches.FixtureContent
 import com.optic.ecommerceappmvvm.presentation.screens.team.components.TeamHeader
 import com.optic.ecommerceappmvvm.presentation.screens.team.components.resume.ResumeContent
+import com.optic.ecommerceappmvvm.presentation.screens.team.components.teamFixture.TeamFixture
 import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -31,7 +33,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun TeamContent(
     paddingValues: PaddingValues,
-    team: Team,
+    team: TeamResponse,
     fixtureState: Resource<List<FixtureResponse>>,
     nexFixtureState: Resource<FixtureResponse>,
     topFiveFixtureState: Resource<List<FixtureResponse>>,
@@ -84,15 +86,17 @@ fun TeamContent(
                         nextFixtureState = nexFixtureState,
                         topFiveFixtureState = topFiveFixtureState,
                         teamId = it,
-                        navController = navController
+                        navController = navController,
+                        team = team
                     )
                 }
                 1 -> PlaceholderTab("Formacion")
-                2 -> FixtureContent(
+                2 -> TeamFixture(
                     modifier = Modifier.padding(paddingValues),
                     navController = navController,
                     fixtureState = fixtureState,
-                    title = "Partidos"
+                    title = "Partidos",
+                    paddingValues = paddingValues
                 )
                 3 -> PlaceholderTab("Estadisticas")
                 4 -> PlaceholderTab("Trofeos")

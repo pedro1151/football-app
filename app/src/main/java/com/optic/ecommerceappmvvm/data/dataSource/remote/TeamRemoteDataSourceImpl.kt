@@ -13,11 +13,12 @@ import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamRequest
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
+import com.optic.ecommerceappmvvm.domain.model.team.TeamResponse
 import retrofit2.Response
 
 class TeamRemoteDataSourceImpl (private val teamService: TeamService): TeamRemoteDataSource {
     override suspend fun getAll(): Response<List<Team>> = teamService.getTeams()
-    override suspend fun getTeamById(teamId: Int): Response<Team> = teamService.getTeamById(teamId)
+    override suspend fun getTeamById(teamId: Int): Response<TeamResponse> = teamService.getTeamById(teamId)
 
     override suspend fun getPlayers(): Response<List<Player>> = teamService.getPlayers()
     override suspend fun getPlayerStats(playerId: Int): Response<PlayerWithStats> = teamService.getPlayerStats(playerId)

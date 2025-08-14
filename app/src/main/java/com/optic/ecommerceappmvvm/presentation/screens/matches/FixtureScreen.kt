@@ -1,5 +1,7 @@
 package com.optic.ecommerceappmvvm.presentation.screens.matches
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -25,6 +27,7 @@ import com.optic.ecommerceappmvvm.presentation.screens.leagues.components.League
 import com.optic.ecommerceappmvvm.presentation.ui.theme.GreyLight
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun FixtureScreen(navController: NavHostController) {
     val viewModel: FixtureViewModel = hiltViewModel()

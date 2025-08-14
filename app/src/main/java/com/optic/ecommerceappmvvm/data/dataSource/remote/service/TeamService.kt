@@ -12,6 +12,7 @@ import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamRequest
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
+import com.optic.ecommerceappmvvm.domain.model.team.TeamResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -29,7 +30,7 @@ interface TeamService {
     @GET("football/teams/{team_id}")
     suspend fun getTeamById(
         @Path("team_id") teamId: Int
-    ): Response<Team>
+    ): Response<TeamResponse>
 
 
     @GET("football/getPlayers")

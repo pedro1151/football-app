@@ -9,6 +9,7 @@ import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
+import com.optic.ecommerceappmvvm.domain.model.team.TeamResponse
 import retrofit2.Response
 
 interface TeamRemoteDataSource {
@@ -17,7 +18,7 @@ interface TeamRemoteDataSource {
    */
     // Teams
     suspend fun getAll(): Response<List<Team>>
-    suspend fun getTeamById(teamId: Int): Response<Team>
+    suspend fun getTeamById(teamId: Int): Response<TeamResponse>
 
     //Players
     suspend fun getPlayers(): Response<List<Player>>

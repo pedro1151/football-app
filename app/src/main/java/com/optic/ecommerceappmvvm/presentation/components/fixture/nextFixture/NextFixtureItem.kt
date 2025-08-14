@@ -59,7 +59,7 @@ fun NextFixtureItem(
             // Título en esquina superior izquierda
             Text(
                 text = title,
-                style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
+               // style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                 color = MaterialTheme.colorScheme.primary,
                 modifier = Modifier
                     .align(Alignment.Start)
