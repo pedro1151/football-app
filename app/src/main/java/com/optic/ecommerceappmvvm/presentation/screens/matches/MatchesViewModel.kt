@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @HiltViewModel
-class FixtureViewModel @Inject constructor(
+class MatchesViewModel @Inject constructor(
     private val teamUseCase: TeamUseCase
 ) : ViewModel() {
 

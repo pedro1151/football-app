@@ -18,6 +18,7 @@ import com.optic.ecommerceappmvvm.domain.useCase.team.GetPlayersUseCase
 import com.optic.ecommerceappmvvm.domain.useCase.team.GetallTeamUseCase
 import com.optic.ecommerceappmvvm.domain.useCase.team.TeamUseCase
 import com.optic.ecommerceappmvvm.domain.useCase.team.equipos.GetTeamByIdUC
+import com.optic.ecommerceappmvvm.domain.useCase.team.fixture.GetFixtureByIdUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.fixture.GetFixtureFollowedTeamsUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.fixture.GetFixtureTeamUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.fixture.GetNextFixtureTeamUC
@@ -25,6 +26,7 @@ import com.optic.ecommerceappmvvm.domain.useCase.team.fixture.GetTopFiveFixtureT
 import com.optic.ecommerceappmvvm.domain.useCase.team.followedLeagues.CreateFollowedLeagueUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.followedLeagues.DeleteFollowedLeagueUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.followedLeagues.GetFollowedLeaguesUC
+import com.optic.ecommerceappmvvm.domain.useCase.team.standings.GetLeagueStandingsUC
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -65,7 +67,9 @@ object UseCaseModule {
         getTeamByIdUC = GetTeamByIdUC(teamRepository),
         getFixtureTeamUC = GetFixtureTeamUC(teamRepository),
         getNextFixtureTeamUC = GetNextFixtureTeamUC(teamRepository),
-        getTopFiveFixtureTeamUC = GetTopFiveFixtureTeamUC(teamRepository)
+        getTopFiveFixtureTeamUC = GetTopFiveFixtureTeamUC(teamRepository),
+        getFixtureByIdUC = GetFixtureByIdUC(teamRepository),
+        getLeagueStandingsUC = GetLeagueStandingsUC(teamRepository)
 
     )
 

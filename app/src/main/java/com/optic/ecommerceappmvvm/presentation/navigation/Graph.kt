@@ -10,4 +10,5 @@ object Graph {
     const val PROFILE = "profile_graph"
     const val PLAYER = "player_graph"
     const val TEAM   = "team_graph"
+    const val FIXTURE   = "fixture_graph"
 }

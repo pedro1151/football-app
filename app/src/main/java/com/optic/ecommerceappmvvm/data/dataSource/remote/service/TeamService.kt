@@ -12,6 +12,7 @@ import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamRequest
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
+import com.optic.ecommerceappmvvm.domain.model.standing.StandingResponse
 import com.optic.ecommerceappmvvm.domain.model.team.TeamResponse
 import retrofit2.Response
 import retrofit2.http.Body
@@ -86,6 +87,12 @@ interface TeamService {
         @Path("team_id") teamId: Int
     ): Response<DefaultResponse>
 
+    // FIXTURE , RECUPERAR POR ID
+    @GET("football/fixtures/{id}")
+    suspend fun getFixtureById(
+        @Path("id") id: Int
+    ): Response<FixtureResponse>
+
     // MATCHES ( FIXTURES ) POR TEAMS SEGUUIDOS
 
     @GET("football/getFixtureFollowedTeams")
@@ -128,6 +135,14 @@ interface TeamService {
     suspend fun deleteFollowedLeague(
         @Path("league_id") leagueId: Int
     ): Response<DefaultResponse>
+
+
+    // STANDINGS ( CLASIFICACIONES) POR LEAGUE Y SEASON
+    @GET("football/leagues/{leagueId}/standings/{season}")
+    suspend fun getLeagueStandings(
+        @Path("leagueId") leagueId: Int,
+        @Path("season") season: Int
+    ): Response<List<StandingResponse>>
 
 
 }

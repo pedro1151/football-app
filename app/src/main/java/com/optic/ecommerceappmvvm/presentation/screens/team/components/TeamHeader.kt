@@ -27,7 +27,7 @@ fun TeamHeader(team: TeamResponse, paddingValues: PaddingValues) {
                 model = team.logo,
                 contentDescription = "Foto del EQuipo",
                 modifier = Modifier
-                    .size(80.dp)
+                    .size(60.dp)
                     .clip(CircleShape)
             )
 

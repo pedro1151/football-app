@@ -13,6 +13,7 @@ import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamRequest
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
+import com.optic.ecommerceappmvvm.domain.model.standing.StandingResponse
 import com.optic.ecommerceappmvvm.domain.model.team.TeamResponse
 import retrofit2.Response
 
@@ -52,7 +53,13 @@ class TeamRemoteDataSourceImpl (private val teamService: TeamService): TeamRemot
 
     override suspend fun deleteFollowedLeague(leagueId: Int): Response<DefaultResponse> = teamService.deleteFollowedLeague(leagueId)
 
-    // MATCHES ( FIXTURES)
+    //FIXTURES (MATCHES)
+    override suspend fun getFixtureById(
+        id: Int
+    ): Response<FixtureResponse> = teamService.getFixtureById(id)
+
+
+    //FIXTURES (MATCHES)
     override suspend fun getFixtureFollowedTeams(
         season: Int,
         date: String
@@ -75,5 +82,10 @@ class TeamRemoteDataSourceImpl (private val teamService: TeamService): TeamRemot
     ): Response<List<FixtureResponse>> = teamService.getTopFiveFixtureTeam(teamId)
 
 
+    // standings
+    override suspend fun getLeagueStandings(
+        leagueId: Int,
+        season: Int
+    ): Response<List<StandingResponse>> = teamService.getLeagueStandings(leagueId, season)
 
 }

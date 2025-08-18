@@ -1,9 +1,8 @@
 package com.optic.ecommerceappmvvm.presentation.screens.matches
 
+
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -12,25 +11,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.optic.ecommerceappmvvm.domain.util.Resource
-import com.optic.ecommerceappmvvm.presentation.navigation.screen.client.ClientScreen
-import com.optic.ecommerceappmvvm.presentation.components.ProgressBar
-import com.optic.ecommerceappmvvm.presentation.screens.client.Teams.list.TeamListViewModel
-import com.optic.ecommerceappmvvm.presentation.screens.client.Teams.list.components.TeamListContent
 
-import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.unit.dp
-import com.optic.ecommerceappmvvm.presentation.components.DefaultTopBar // Solo si usás topbar común
 import com.optic.ecommerceappmvvm.presentation.components.PrimaryTopBar
-import com.optic.ecommerceappmvvm.presentation.screens.leagues.components.LeagueSearchBar
+import com.optic.ecommerceappmvvm.presentation.screens.fixtures.list.FixtureList
 import com.optic.ecommerceappmvvm.presentation.ui.theme.GreyLight
 
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun FixtureScreen(navController: NavHostController) {
-    val viewModel: FixtureViewModel = hiltViewModel()
+fun MatchesScreen(navController: NavHostController) {
+    val viewModel: MatchesViewModel = hiltViewModel()
 
     val fixtureState by viewModel.fixtureTeamsState.collectAsState()
 
@@ -49,7 +40,7 @@ fun FixtureScreen(navController: NavHostController) {
         },
         containerColor = GreyLight
     ) { paddingValues ->
-        FixtureContent(
+        FixtureList(
             modifier = Modifier.padding(paddingValues),
             navController = navController,
             fixtureState = fixtureState

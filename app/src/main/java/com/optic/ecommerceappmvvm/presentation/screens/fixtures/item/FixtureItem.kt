@@ -1,9 +1,10 @@
-package com.optic.ecommerceappmvvm.presentation.screens.matches.components
+package com.optic.ecommerceappmvvm.presentation.screens.fixtures.item
 
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,9 +17,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.optic.ecommerceappmvvm.domain.model.fixture.FixtureResponse
+import com.optic.ecommerceappmvvm.presentation.navigation.Graph
 import com.optic.ecommerceappmvvm.presentation.ui.theme.getGreenColorFixture
 import com.optic.ecommerceappmvvm.presentation.ui.theme.getRedColorFixture
 import java.time.LocalDateTime
@@ -28,7 +31,10 @@ import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun FixtureItem(fixture: FixtureResponse) {
+fun FixtureItem(
+    fixture: FixtureResponse,
+    navController: NavHostController
+    ) {
     val fixtureDateTime = remember {
         try {
             OffsetDateTime.parse(fixture.date).toLocalDateTime()
@@ -47,8 +53,15 @@ fun FixtureItem(fixture: FixtureResponse) {
     }
 
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable {
+                fixture.id?.let {
+                    navController.navigate("${Graph.FIXTURE}/$it")
+                }
+            },
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
 

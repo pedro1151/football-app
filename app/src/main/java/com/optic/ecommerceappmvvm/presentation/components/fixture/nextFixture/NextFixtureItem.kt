@@ -59,11 +59,11 @@ fun NextFixtureItem(
             // Título en esquina superior izquierda
             Text(
                 text = title,
-               // style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                 color = MaterialTheme.colorScheme.primary,
+                style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier
                     .align(Alignment.Start)
-                    .padding(bottom = 6.dp)
+                    .padding(bottom = 15.dp)
             )
 
             // Fecha (izquierda) y liga (derecha)

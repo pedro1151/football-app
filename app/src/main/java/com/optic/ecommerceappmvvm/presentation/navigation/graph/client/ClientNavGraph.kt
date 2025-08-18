@@ -1,24 +1,23 @@
 package com.optic.ecommerceappmvvm.presentation.navigation.graph.client
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navigation
 import com.optic.ecommerceappmvvm.presentation.navigation.Graph
 import com.optic.ecommerceappmvvm.presentation.navigation.graph.profile.ProfileNavGraph
 import com.optic.ecommerceappmvvm.presentation.navigation.screen.client.ClientScreen
-import com.optic.ecommerceappmvvm.presentation.screens.client.Teams.list.TeamListScreen
 import com.optic.ecommerceappmvvm.presentation.screens.client.playerStats.PlayerStatsScreen
-import com.optic.ecommerceappmvvm.presentation.screens.client.players.list.PlayerListScreen
+import com.optic.ecommerceappmvvm.presentation.screens.fixtures.detail.FixtureDetailScreen
 import com.optic.ecommerceappmvvm.presentation.screens.follow.FollowScreen
 import com.optic.ecommerceappmvvm.presentation.screens.leagues.LeagueScreen
-import com.optic.ecommerceappmvvm.presentation.screens.leagues.LeagueViewModel
 import com.optic.ecommerceappmvvm.presentation.screens.mas.MasScreen
-import com.optic.ecommerceappmvvm.presentation.screens.matches.FixtureScreen
-import com.optic.ecommerceappmvvm.presentation.screens.profile.info.ProfileScreen
+import com.optic.ecommerceappmvvm.presentation.screens.matches.MatchesScreen
 import com.optic.ecommerceappmvvm.presentation.screens.team.TeamScreen
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ClientNavGraph(navController: NavHostController) {
     NavHost(
@@ -28,7 +27,7 @@ fun ClientNavGraph(navController: NavHostController) {
     ) {
 
         composable(route = ClientScreen.Matches.route) {
-            FixtureScreen(navController)
+            MatchesScreen(navController)
         }
 
         composable(route = ClientScreen.Follow.route) {
@@ -57,6 +56,12 @@ fun ClientNavGraph(navController: NavHostController) {
         ) { backStackEntry ->
             val teamId = backStackEntry.arguments?.getString("teamId")?.toInt() ?: 0
             TeamScreen(navController = navController, teamId = teamId)
+        }
+        // DETALLE DE FIXTURE
+        composable(route = Graph.FIXTURE + "/{fixtureId}"
+        ) { backStackEntry ->
+            val fixtureId= backStackEntry.arguments?.getString("fixtureId")?.toInt() ?: 0
+            FixtureDetailScreen(navController = navController, fixtureId = fixtureId)
         }
 
 

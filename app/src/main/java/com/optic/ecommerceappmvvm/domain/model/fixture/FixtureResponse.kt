@@ -18,6 +18,7 @@ data class FixtureResponse(
     @SerializedName("status_elapsed") val statusElapsed: Int?,
     @SerializedName("status_extra") val statusExtra: String?,
     @SerializedName("league") val league: League,
+    @SerializedName("league_season") val leagueSeason: Int?,
     @SerializedName("team_home") val teamHome: Team,
     @SerializedName("team_away") val teamAway: Team,
     @SerializedName("team_winner") val teamWinner: Team?,
@@ -40,18 +41,4 @@ data class Venue(
     @SerializedName("name") val name: String,
     @SerializedName("city") val city: String,
     @SerializedName("image") val image: String
-)
-
-data class League(
-    @SerializedName("id") val id: Int,
-    @SerializedName("api_id") val apiId: Int,
-    @SerializedName("name") val name: String,
-    @SerializedName("country_id") val countryId: Int,
-    @SerializedName("logo") val logo: String
-)
-
-data class Team(
-    @SerializedName("id") val id: Int,
-    @SerializedName("name") val name: String,
-    @SerializedName("logo") val logo: String
 )

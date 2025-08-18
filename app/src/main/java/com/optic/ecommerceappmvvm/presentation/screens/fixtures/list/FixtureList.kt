@@ -1,4 +1,4 @@
-package com.optic.ecommerceappmvvm.presentation.screens.matches
+package com.optic.ecommerceappmvvm.presentation.screens.fixtures.list
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -7,30 +7,27 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.optic.ecommerceappmvvm.domain.model.fixture.FixtureResponse
 import com.optic.ecommerceappmvvm.domain.util.Resource
-import com.optic.ecommerceappmvvm.presentation.screens.matches.components.FixtureItem
+import com.optic.ecommerceappmvvm.presentation.screens.fixtures.item.FixtureItem
 import com.optic.ecommerceappmvvm.presentation.ui.theme.IconSecondaryColor
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun FixtureContent(
+fun FixtureList(
     modifier: Modifier = Modifier,
     navController: NavHostController,
     fixtureState: Resource<List<FixtureResponse>>,
@@ -91,7 +88,10 @@ fun FixtureContent(
                 is Resource.Success -> {
                     LazyColumn(verticalArrangement = Arrangement.spacedBy(1.dp)) {
                         items(fixtureState.data ?: emptyList()) { fixture ->
-                            FixtureItem(fixture = fixture)
+                            FixtureItem(
+                                fixture = fixture,
+                                navController =  navController
+                                )
                         }
                     }
                 }

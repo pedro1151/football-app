@@ -9,6 +9,7 @@ import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
+import com.optic.ecommerceappmvvm.domain.model.standing.StandingResponse
 import com.optic.ecommerceappmvvm.domain.model.team.TeamResponse
 import com.optic.ecommerceappmvvm.domain.util.Resource
 import kotlinx.coroutines.flow.Flow
@@ -42,9 +43,13 @@ interface TeamRepository {
     suspend fun deleteFollowedLeague(leagueId: Int):Flow<Resource<DefaultResponse>>
 
 
-    //MATCHES ( FIXTURE )
+    //FIXTURE
+    suspend fun getFixtureById(id: Int): Flow<Resource<FixtureResponse>>
     suspend fun getFixtureFollowedTeams(season: Int, date: String): Flow<Resource<List<FixtureResponse>>>
     suspend fun getFixtureTeam(teamId: Int): Flow<Resource<List<FixtureResponse>>>
     suspend fun getNextFixtureTeam(teamId: Int): Flow<Resource<FixtureResponse>>
     suspend fun getTopFiveFixtureTeam(teamId: Int): Flow<Resource<List<FixtureResponse>>>
+
+    //STANDINGS
+    suspend fun getLeagueStandings(leagueId: Int, season: Int): Flow<Resource<List<StandingResponse>>>
 }

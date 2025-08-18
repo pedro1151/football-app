@@ -1,6 +1,7 @@
 package com.optic.ecommerceappmvvm.domain.useCase.team
 
 import com.optic.ecommerceappmvvm.domain.useCase.team.equipos.GetTeamByIdUC
+import com.optic.ecommerceappmvvm.domain.useCase.team.fixture.GetFixtureByIdUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.fixture.GetFixtureFollowedTeamsUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.fixture.GetFixtureTeamUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.fixture.GetNextFixtureTeamUC
@@ -8,6 +9,7 @@ import com.optic.ecommerceappmvvm.domain.useCase.team.fixture.GetTopFiveFixtureT
 import com.optic.ecommerceappmvvm.domain.useCase.team.followedLeagues.CreateFollowedLeagueUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.followedLeagues.DeleteFollowedLeagueUC
 import com.optic.ecommerceappmvvm.domain.useCase.team.followedLeagues.GetFollowedLeaguesUC
+import com.optic.ecommerceappmvvm.domain.useCase.team.standings.GetLeagueStandingsUC
 
 data class TeamUseCase(
 
@@ -37,11 +39,18 @@ data class TeamUseCase(
     val getNextFixtureTeamUC : GetNextFixtureTeamUC,
     val getTopFiveFixtureTeamUC : GetTopFiveFixtureTeamUC,
 
+    //FISTURE X ID
+    val getFixtureByIdUC : GetFixtureByIdUC,
+
 
     // UC LEAGUES SEGUIDOS
 
     val getFollowedLeaguesUC   : GetFollowedLeaguesUC,
     val createFollowedLeagueUC   : CreateFollowedLeagueUC,
-    val deleteFollowedLeagueUC  : DeleteFollowedLeagueUC
+    val deleteFollowedLeagueUC  : DeleteFollowedLeagueUC,
+
+
+    //standings
+    val getLeagueStandingsUC : GetLeagueStandingsUC
 
 )

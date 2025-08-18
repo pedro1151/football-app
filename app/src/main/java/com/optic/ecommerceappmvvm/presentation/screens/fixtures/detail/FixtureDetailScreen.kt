@@ -1,4 +1,4 @@
-package com.optic.ecommerceappmvvm.presentation.screens.team
+package com.optic.ecommerceappmvvm.presentation.screens.fixtures.detail
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -14,30 +14,26 @@ import com.optic.ecommerceappmvvm.domain.util.Resource
 import com.optic.ecommerceappmvvm.presentation.components.BackTopBar
 
 import com.optic.ecommerceappmvvm.presentation.components.ProgressBar
+import com.optic.ecommerceappmvvm.presentation.screens.team.TeamContent
+import com.optic.ecommerceappmvvm.presentation.screens.team.TeamViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun TeamScreen(
-    teamId: Int,
+fun FixtureDetailScreen(
+    fixtureId: Int,
     navController: NavHostController
 
-    )
+)
 {
-    val viewModel: TeamViewModel = hiltViewModel()
+    val viewModel: FixtureDetailViewModel = hiltViewModel()
 
-    val state by viewModel.teamState.collectAsState()
-    val fixtureState by viewModel.fixtureTeamsState.collectAsState()
-    val nextFixtureState by viewModel.nextFixtureTeamsState.collectAsState()
-    val topFiveFixtureState by viewModel.topFiveFixtureTeamsState.collectAsState()
+    // estados
+    val fixtureState by viewModel.fixtureState.collectAsState()
 
     // Llamar a la función solo una vez al inicio
-    LaunchedEffect(teamId) {
-        viewModel.getTeamById  (teamId)
-        // Llamamos la función cuando entra la pantalla
-        viewModel.getFixtureTeam (teamId)
-        viewModel.getTopFiveFixtureTeam(teamId)
-        viewModel.getNextFixtureTeam(teamId)
+    LaunchedEffect(fixtureId) {
+        viewModel.getFixtureById(fixtureId)
     }
 
 
@@ -48,19 +44,16 @@ fun TeamScreen(
             )
         }
     ) { paddingValues ->
-        when (state) {
+        when (fixtureState) {
             is Resource.Loading -> {
                 ProgressBar()
             }
 
             is Resource.Success -> {
-                val data = (state as Resource.Success).data
-                TeamContent(
+                val data = (fixtureState as Resource.Success).data
+                FixtureDetailContent(
                     paddingValues = paddingValues,
-                    team = data,
-                    fixtureState = fixtureState,
-                    nexFixtureState = nextFixtureState,
-                    topFiveFixtureState = topFiveFixtureState,
+                    fixture = data,
                     navController
                 )
             }

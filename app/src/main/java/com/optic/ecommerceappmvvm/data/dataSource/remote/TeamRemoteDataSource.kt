@@ -9,6 +9,7 @@ import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
+import com.optic.ecommerceappmvvm.domain.model.standing.StandingResponse
 import com.optic.ecommerceappmvvm.domain.model.team.TeamResponse
 import retrofit2.Response
 
@@ -44,6 +45,9 @@ interface TeamRemoteDataSource {
 
 
     // FIXTURES
+  //Recuperar Fixture por Id
+    suspend fun getFixtureById(id: Int): Response<FixtureResponse>
+   //fixtures de teans seguidos
     suspend fun getFixtureFollowedTeams(season: Int, date: String): Response<List<FixtureResponse>>
     //Teams
     suspend fun getFixtureTeam(teamId: Int): Response<List<FixtureResponse>>
@@ -51,4 +55,6 @@ interface TeamRemoteDataSource {
     suspend fun getTopFiveFixtureTeam(teamId: Int): Response<List<FixtureResponse>>
 
 
+  // standings
+    suspend fun getLeagueStandings(leagueId: Int, season: Int): Response<List<StandingResponse>>
 }

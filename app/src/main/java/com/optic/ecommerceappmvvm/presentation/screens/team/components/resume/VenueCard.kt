@@ -37,9 +37,12 @@ fun VenueCard(
         ) {
             // Título del card
             Text(
-                text = "Venue",
-                style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
-                modifier = Modifier.padding(bottom = 8.dp)
+                text = "Estadio",
+                color = MaterialTheme.colorScheme.primary,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier
+                    .align(Alignment.Start)
+                    .padding(bottom = 15.dp)
             )
 
             // Imagen del estadio

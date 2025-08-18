@@ -1,5 +1,4 @@
-package com.optic.ecommerceappmvvm.presentation.screens.team
-
+package com.optic.ecommerceappmvvm.presentation.screens.fixtures.detail
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -10,31 +9,25 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.navigation.NavHostController
 import com.optic.ecommerceappmvvm.domain.model.fixture.FixtureResponse
-import com.optic.ecommerceappmvvm.domain.model.team.TeamResponse
-import com.optic.ecommerceappmvvm.domain.util.Resource
-
 import com.optic.ecommerceappmvvm.presentation.screens.client.playerStats.components.PlaceholderTab
-import com.optic.ecommerceappmvvm.presentation.screens.team.components.TeamHeader
-import com.optic.ecommerceappmvvm.presentation.screens.team.components.resume.ResumeContent
-import com.optic.ecommerceappmvvm.presentation.screens.team.components.teamFixture.TeamFixture
+import com.optic.ecommerceappmvvm.presentation.screens.fixtures.detail.components.FixtureDetailHeader
+
+import com.optic.ecommerceappmvvm.presentation.screens.fixtures.detail.components.standings.LeagueStandingsList
+
 import kotlinx.coroutines.launch
 
 @RequiresApi(Build.VERSION_CODES.O)
 @ExperimentalFoundationApi
 @Composable
-fun TeamContent(
+fun FixtureDetailContent(
     paddingValues: PaddingValues,
-    team: TeamResponse,
-    fixtureState: Resource<List<FixtureResponse>>,
-    nexFixtureState: Resource<FixtureResponse>,
-    topFiveFixtureState: Resource<List<FixtureResponse>>,
+    fixture: FixtureResponse,
     navController: NavHostController
 ) {
-    val tabTitles = listOf("Resumen", "Formacion", "Partidos", "Estadisticas", "Trofeos", "Novedades")
+    val tabTitles = listOf("Resumen", "Alineacion", "Clasificacion", "Estadisticas", "Estadisticas", "Cara a Cara")
     val pagerState = rememberPagerState(pageCount = { tabTitles.size })
     val coroutineScope = rememberCoroutineScope()
 
@@ -44,7 +37,7 @@ fun TeamContent(
             .padding(paddingValues)
 
     ) {
-        TeamHeader(team, paddingValues)
+        FixtureDetailHeader(fixture, paddingValues)
 
         ScrollableTabRow(
             selectedTabIndex = pagerState.currentPage,
@@ -75,24 +68,21 @@ fun TeamContent(
             modifier = Modifier.fillMaxSize()
         ) { page ->
             when (page) {
-                0 -> team?.id?.let {
-                    ResumeContent(
-                        paddingValues = paddingValues,
-                        nextFixtureState = nexFixtureState,
-                        topFiveFixtureState = topFiveFixtureState,
-                        teamId = it,
-                        navController = navController,
-                        team = team
-                    )
-                }
+                0 -> PlaceholderTab("Formacion")
                 1 -> PlaceholderTab("Formacion")
-                2 -> TeamFixture(
-                    modifier = Modifier.padding(paddingValues),
-                    navController = navController,
-                    fixtureState = fixtureState,
-                    title = "Partidos",
-                    paddingValues = paddingValues
-                )
+                2 -> {
+                    fixture.league?.let { league ->
+                        fixture.leagueSeason?.let {
+                            LeagueStandingsList(
+                                paddingValues = paddingValues,
+                                league = league,
+                                season = it,
+                                teamHome = fixture.teamHome,
+                                teamAway = fixture.teamAway
+                            )
+                        }
+                    } ?: PlaceholderTab("Liga no disponible")
+                }
                 3 -> PlaceholderTab("Estadisticas")
                 4 -> PlaceholderTab("Trofeos")
                 5 -> PlaceholderTab("Novedades")
