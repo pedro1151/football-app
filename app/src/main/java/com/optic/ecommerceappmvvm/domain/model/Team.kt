@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets
 
 data class Team(
     @SerializedName("id") val id: Int? = null,
+    @SerializedName("api_id") val apiId: Int? = null,
     @SerializedName("name") var name: String,
     @SerializedName("country") val country: String? = null,
     @SerializedName("founded") val founded: Int? = null,
@@ -22,6 +23,7 @@ data class Team(
 
     fun toJson(): String = Gson().toJson(Team(
         id,
+        apiId,
         name,
         country,
         founded,

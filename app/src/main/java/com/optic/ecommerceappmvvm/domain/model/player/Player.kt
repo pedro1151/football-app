@@ -6,6 +6,7 @@ import java.io.Serializable
 
 data class Player(
     @SerializedName("id") val id: Int? = null,
+    @SerializedName("api_id") val apiId: Int? = null,
     @SerializedName("name") var name: String,
     @SerializedName("firstname") var firstname: String,
     @SerializedName("lastname") var lastname: String,
@@ -22,6 +23,7 @@ data class Player(
     fun toJson(): String = Gson().toJson(
         Player(
         id,
+            apiId,
         name,
         firstname,
         lastname,

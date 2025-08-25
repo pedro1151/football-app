@@ -7,6 +7,7 @@ import com.optic.ecommerceappmvvm.domain.model.fixture.FixtureResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedLeagueResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
+import com.optic.ecommerceappmvvm.domain.model.player.playerteams.PlayerTeamsResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
 import com.optic.ecommerceappmvvm.domain.model.standing.StandingResponse
@@ -24,6 +25,7 @@ interface TeamRemoteDataSource {
     //Players
     suspend fun getPlayers(): Response<List<Player>>
     suspend fun getPlayerStats(playerId: Int): Response<PlayerWithStats>
+    suspend fun getPlayerTeams(playerId: Int): Response<PlayerTeamsResponse>
     suspend fun getLeagues(name: String, type: String, countryName: String): Response<List<League>>
 
     //PLAYER SEGUIDOS
@@ -53,7 +55,13 @@ interface TeamRemoteDataSource {
     suspend fun getFixtureTeam(teamId: Int): Response<List<FixtureResponse>>
     suspend fun getNextFixtureTeam(teamId: Int): Response<FixtureResponse>
     suspend fun getTopFiveFixtureTeam(teamId: Int): Response<List<FixtureResponse>>
-
+    // versus
+    suspend fun getFixtureVersus(
+        teamOneId: Int,
+        teamTwoId: Int,
+        leagueId: Int,
+        season: Int
+        ): Response<List<FixtureResponse>>
 
   // standings
     suspend fun getLeagueStandings(leagueId: Int, season: Int): Response<List<StandingResponse>>

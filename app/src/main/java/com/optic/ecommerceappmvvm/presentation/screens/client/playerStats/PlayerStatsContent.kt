@@ -12,11 +12,14 @@ import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.navigation.NavController
+import com.optic.ecommerceappmvvm.domain.model.player.playerteams.PlayerTeamsResponse
+import com.optic.ecommerceappmvvm.domain.util.Resource
 
 import com.optic.ecommerceappmvvm.presentation.screens.client.playerStats.components.PlaceholderTab
 import com.optic.ecommerceappmvvm.presentation.screens.client.playerStats.components.PlayerHeader
 import com.optic.ecommerceappmvvm.presentation.screens.client.playerStats.components.PlayerProfileTab
 import com.optic.ecommerceappmvvm.presentation.screens.client.playerStats.components.PlayerStatsContentTab
+import com.optic.ecommerceappmvvm.presentation.screens.client.playerStats.trayectoria.PlayerTeamsContent
 import kotlinx.coroutines.launch
 
 @ExperimentalFoundationApi
@@ -24,7 +27,8 @@ import kotlinx.coroutines.launch
 fun PlayerStatsContent(
     paddingValues: PaddingValues,
     playerStats: PlayerWithStats,
-    navController: NavController
+    navController: NavController,
+    playerTeamsState: Resource<PlayerTeamsResponse>
 ) {
     val tabTitles = listOf("Perfil", "Estadísticas", "Partidos", "Trayectoria")
     val pagerState = rememberPagerState(pageCount = { tabTitles.size })
@@ -69,7 +73,10 @@ fun PlayerStatsContent(
                 0 -> PlayerProfileTab(playerStats)
                 1 -> PlayerStatsContentTab(paddingValues = PaddingValues(8.dp), playerStats = playerStats)
                 2 -> PlaceholderTab("Partidos")
-                3 -> PlaceholderTab("Trayectoria")
+                3 -> PlayerTeamsContent(
+                    paddingValues = paddingValues,
+                    state = playerTeamsState
+                )
             }
         }
     }

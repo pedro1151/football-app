@@ -10,6 +10,7 @@ import com.optic.ecommerceappmvvm.domain.model.fixture.FixtureResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedLeagueResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
+import com.optic.ecommerceappmvvm.domain.model.player.playerteams.PlayerTeamsResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
 import com.optic.ecommerceappmvvm.domain.model.standing.StandingResponse
@@ -39,6 +40,8 @@ class TeamRepositoryImpl(
         )
     }
 
+
+    //PLAYERS
     override suspend fun getPlayers(): Flow<Resource<List<Player>>> = flow{
         emit(
             ResponseToRequest.send(
@@ -54,6 +57,16 @@ class TeamRepositoryImpl(
             )
         )
     }
+
+    override suspend fun getPlayerTeams(playerId: Int): Flow<Resource<PlayerTeamsResponse>> = flow{
+        emit(
+            ResponseToRequest.send(
+                teamRemoteDataSource.getPlayerTeams(playerId)
+            )
+        )
+    }
+
+
 
     override suspend fun getLeagues(
         name: String,
@@ -159,6 +172,20 @@ class TeamRepositoryImpl(
         emit(
             ResponseToRequest.send(
                 teamRemoteDataSource.getFixtureFollowedTeams(season, date)
+            )
+        )
+    }
+
+    // Versus FIxture
+    override suspend fun getFixtureVersus(
+        teamOneId: Int,
+        teamTwoId: Int,
+        leagueId: Int,
+        season: Int
+    ): Flow<Resource<List<FixtureResponse>>>  = flow{
+        emit(
+            ResponseToRequest.send(
+                teamRemoteDataSource.getFixtureVersus(teamOneId, teamTwoId, leagueId, season)
             )
         )
     }

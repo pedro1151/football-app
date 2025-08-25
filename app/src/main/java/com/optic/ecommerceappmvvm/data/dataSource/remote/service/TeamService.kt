@@ -10,6 +10,7 @@ import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerRequest
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamRequest
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
+import com.optic.ecommerceappmvvm.domain.model.player.playerteams.PlayerTeamsResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
 import com.optic.ecommerceappmvvm.domain.model.standing.StandingResponse
@@ -33,6 +34,7 @@ interface TeamService {
         @Path("team_id") teamId: Int
     ): Response<TeamResponse>
 
+    // players
 
     @GET("football/getPlayers")
     suspend fun getPlayers(
@@ -40,10 +42,16 @@ interface TeamService {
 
     /*  Recupera la informacion de un Player junto con todas sus estatisticas
     * ligas, equipos, goles etc..   */
-    @GET("football/getPlayerStats")
+    @GET("football/players/stats/{player_id}")
     suspend fun getPlayerStats(
-        @Query("player_id") playerId: Int
+        @Path("player_id") playerId: Int
     ): Response<PlayerWithStats>
+
+     // Trayectoria
+    @GET("football/players/teams/{player_id}")
+    suspend fun getPlayerTeams(
+        @Path("player_id") playerId: Int
+    ): Response<PlayerTeamsResponse>
 
    // get ligas
    @GET("football/getLeagues")
@@ -86,6 +94,16 @@ interface TeamService {
     suspend fun deleteFollowedTeam(
         @Path("team_id") teamId: Int
     ): Response<DefaultResponse>
+
+    // VERSUS FIXTURE
+
+    @GET("football/versusTeamFixture")
+    suspend fun getFixtureVersus(
+        @Query("team_one_id") teamOneId: Int,
+        @Query("team_two_id") teamTwoId: Int,
+        @Query("league_id") leagueId: Int,
+        @Query("season") season: Int
+    ): Response<List<FixtureResponse>>
 
     // FIXTURE , RECUPERAR POR ID
     @GET("football/fixtures/{id}")

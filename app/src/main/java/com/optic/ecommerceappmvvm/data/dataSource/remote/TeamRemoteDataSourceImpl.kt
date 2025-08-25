@@ -11,6 +11,7 @@ import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerRequest
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedPlayerResponse
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamRequest
 import com.optic.ecommerceappmvvm.domain.model.followed.FollowedTeamResponse
+import com.optic.ecommerceappmvvm.domain.model.player.playerteams.PlayerTeamsResponse
 import com.optic.ecommerceappmvvm.domain.model.player.stats.PlayerWithStats
 import com.optic.ecommerceappmvvm.domain.model.response.DefaultResponse
 import com.optic.ecommerceappmvvm.domain.model.standing.StandingResponse
@@ -21,8 +22,11 @@ class TeamRemoteDataSourceImpl (private val teamService: TeamService): TeamRemot
     override suspend fun getAll(): Response<List<Team>> = teamService.getTeams()
     override suspend fun getTeamById(teamId: Int): Response<TeamResponse> = teamService.getTeamById(teamId)
 
+    // PLAYERS
     override suspend fun getPlayers(): Response<List<Player>> = teamService.getPlayers()
     override suspend fun getPlayerStats(playerId: Int): Response<PlayerWithStats> = teamService.getPlayerStats(playerId)
+    override suspend fun getPlayerTeams(playerId: Int): Response<PlayerTeamsResponse> = teamService.getPlayerTeams(playerId)
+
     override suspend fun getLeagues(
         name: String,
         type: String,
@@ -80,6 +84,14 @@ class TeamRemoteDataSourceImpl (private val teamService: TeamService): TeamRemot
     override suspend fun getTopFiveFixtureTeam(
         teamId: Int
     ): Response<List<FixtureResponse>> = teamService.getTopFiveFixtureTeam(teamId)
+
+    // Versus Fixture
+    override suspend fun getFixtureVersus(
+        teamOneId: Int,
+        teamTwoId: Int,
+        leagueId: Int,
+        season: Int
+    ): Response<List<FixtureResponse>> = teamService.getFixtureVersus(teamOneId, teamTwoId, leagueId, season)
 
 
     // standings

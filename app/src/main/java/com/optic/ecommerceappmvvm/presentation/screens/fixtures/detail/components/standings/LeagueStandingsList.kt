@@ -91,12 +91,20 @@ fun LeagueStandingsList(
                                     .padding(vertical = 4.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Text(text = "Rank", modifier = Modifier.width(40.dp))
+                                Text(
+                                    text = "Rank",
+                                    modifier = Modifier.width(30.dp),
+                                    style = MaterialTheme.typography.bodySmall
+                                )
                                 Spacer(modifier = Modifier.width(8.dp))
-                                Text(text = "Equipo", modifier = Modifier.weight(1f))
-                                Text(text = "J", modifier = Modifier.width(30.dp))
-                                Text(text = "DG", modifier = Modifier.width(30.dp))
-                                Text(text = "Pts", modifier = Modifier.width(40.dp))
+                                Text(
+                                    text = "Equipo",
+                                    modifier = Modifier.weight(1f),
+                                style = MaterialTheme.typography.bodySmall
+                                )
+                                Text(text = "J", style = MaterialTheme.typography.bodySmall, modifier = Modifier.width(30.dp))
+                                Text(text = "DG", style = MaterialTheme.typography.bodySmall, modifier = Modifier.width(30.dp))
+                                Text(text = "Pts",style = MaterialTheme.typography.bodySmall, modifier = Modifier.width(30.dp))
                             }
                         }
 

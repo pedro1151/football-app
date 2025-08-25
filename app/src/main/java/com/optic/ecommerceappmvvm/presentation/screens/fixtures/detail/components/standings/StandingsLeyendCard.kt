@@ -23,8 +23,8 @@ fun StandingsLegendCard() {
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 12.dp, vertical = 6.dp),
-           // .background(MaterialTheme.colorScheme.background),
-       // colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+           // .background(MaterialTheme.colorScheme.secondary),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
         shape = RoundedCornerShape(12.dp)
     ) {
         Column(

@@ -14,6 +14,7 @@ import androidx.navigation.NavHostController
 import com.optic.ecommerceappmvvm.domain.model.fixture.FixtureResponse
 import com.optic.ecommerceappmvvm.presentation.screens.client.playerStats.components.PlaceholderTab
 import com.optic.ecommerceappmvvm.presentation.screens.fixtures.detail.components.FixtureDetailHeader
+import com.optic.ecommerceappmvvm.presentation.screens.fixtures.detail.components.facetoface.VersusFixtureContent
 
 import com.optic.ecommerceappmvvm.presentation.screens.fixtures.detail.components.standings.LeagueStandingsList
 
@@ -27,7 +28,7 @@ fun FixtureDetailContent(
     fixture: FixtureResponse,
     navController: NavHostController
 ) {
-    val tabTitles = listOf("Resumen", "Alineacion", "Clasificacion", "Estadisticas", "Estadisticas", "Cara a Cara")
+    val tabTitles = listOf("Resumen", "Alineacion", "Clasificacion",  "Cara a Cara")
     val pagerState = rememberPagerState(pageCount = { tabTitles.size })
     val coroutineScope = rememberCoroutineScope()
 
@@ -83,9 +84,14 @@ fun FixtureDetailContent(
                         }
                     } ?: PlaceholderTab("Liga no disponible")
                 }
-                3 -> PlaceholderTab("Estadisticas")
-                4 -> PlaceholderTab("Trofeos")
-                5 -> PlaceholderTab("Novedades")
+                3 -> {
+                    VersusFixtureContent(
+                        modifier = Modifier,
+                        navController = navController,
+                        fixture =  fixture,
+                        paddingValues = paddingValues
+                    )
+                }
             }
         }
     }

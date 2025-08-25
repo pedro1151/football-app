@@ -43,7 +43,7 @@ fun LeagueStandingItem(
         5 -> ModernBlue
         6 -> ModernYellow
         in 17..20 -> ModernRed
-        else -> MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
+        else ->         MaterialTheme.colorScheme.primary
     }
 
     val backgroundColor = if (isHighlighted) {
@@ -79,8 +79,10 @@ fun LeagueStandingItem(
         ) {
             Text(
                 text = standing.rank.toString(),
-                modifier = Modifier.width(32.dp),
-                style = MaterialTheme.typography.labelMedium
+                modifier = Modifier.width(25.dp),
+                style = MaterialTheme.typography.labelMedium,
+                fontWeight = FontWeight.Bold,
+                color = indicatorColor
             )
 
             AsyncImage(
@@ -101,19 +103,19 @@ fun LeagueStandingItem(
 
             Text(
                 text = standing.allPlayed?.toString() ?: "-",
-                modifier = Modifier.width(32.dp),
+                modifier = Modifier.width(30.dp),
                 style = MaterialTheme.typography.bodySmall
             )
             Text(
                 text = standing.goalsDiff?.toString() ?: "-",
-                modifier = Modifier.width(32.dp),
+                modifier = Modifier.width(30.dp),
                 style = MaterialTheme.typography.bodySmall
             )
             Text(
                 text = standing.points.toString(),
-                modifier = Modifier.width(40.dp),
+                modifier = Modifier.width(30.dp),
                 fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodySmall
             )
         }
     }

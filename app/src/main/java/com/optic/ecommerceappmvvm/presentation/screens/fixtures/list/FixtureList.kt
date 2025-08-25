@@ -98,7 +98,7 @@ fun FixtureList(
 
                 is Resource.Failure -> {
                     Text(
-                        text = "Error",
+                        text = "Error al cargar los Partidos",
                         color = MaterialTheme.colorScheme.error
                     )
                 }

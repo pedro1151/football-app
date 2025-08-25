@@ -1,5 +1,6 @@
 package com.optic.ecommerceappmvvm.presentation.screens.client.playerStats
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -24,10 +25,13 @@ fun PlayerStatsScreen(
     val viewModel: PlayerStatsViewModel = hiltViewModel()
 
     val state by viewModel.playerStatsState.collectAsState()
+    val playerTeamsState by viewModel.playerTeamsState.collectAsState()
 
     // Llamar a la función solo una vez al inicio
     LaunchedEffect(playerId) {
+        Log.d("PlayerScreen", "Llamando a funciones con playerId=$playerId")
         viewModel.getPlayerStats(playerId)
+        viewModel.getPlayerTeams(playerId)
     }
 
 
@@ -45,7 +49,7 @@ fun PlayerStatsScreen(
 
             is Resource.Success -> {
                 val data = (state as Resource.Success).data
-                PlayerStatsContent(paddingValues, data, navController)
+                PlayerStatsContent(paddingValues, data, navController, playerTeamsState )
             }
 
             is Resource.Failure -> {
